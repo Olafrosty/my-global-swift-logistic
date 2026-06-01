@@ -1,0 +1,555 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Global Swift Logistics - Fast, Reliable, Worldwide</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600;700&family=Inter:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<style>
+:root{
+  --navy:#0A2342;
+  --orange:#FF6B35;
+  --light:#F7F9FC;
+  --white:#ffffff;
+  --text:#1E293B;
+  --muted:#64748B;
+  --radius:12px;
+  --shadow:0 4px 20px rgba(0,0,0,0.08);
+  --trans:0.3s ease;
+}
+
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Inter',sans-serif;color:var(--text);line-height:1.6;background:var(--white)}
+h1,h2,h3,h4{font-family:'Poppins',sans-serif;color:var(--navy);margin-bottom:16px}
+img{max-width:100%;display:block;border-radius:var(--radius)}
+a{text-decoration:none}
+.container{max-width:1200px;margin:0 auto;padding:0 20px}
+section{padding:80px 0}
+.grid{display:flex;flex-wrap:wrap;gap:30px}
+.card{flex:1 1 300px;background:var(--white);padding:32px;border-radius:var(--radius);box-shadow:var(--shadow);transition:var(--trans)}
+.card:hover{transform:translateY(-8px);box-shadow:0 12px 32px rgba(0,0,0,0.12)}
+.card i{font-size:42px;color:var(--orange);margin-bottom:16px}
+.btn{background:var(--orange);color:var(--white);padding:14px 32px;border-radius:8px;font-weight:600;display:inline-block;border:none;cursor:pointer;transition:var(--trans)}
+.btn:hover{background:#e55a28;transform:translateY(-2px)}
+
+/* NAVBAR */
+nav{background:var(--navy);position:sticky;top:0;z-index:1000;box-shadow:0 2px 12px rgba(0,0,0,0.1)}
+.nav-wrap{display:flex;justify-content:space-between;align-items:center;padding:18px 20px}
+.logo{font-family:'Poppins';font-weight:700;font-size:24px;color:var(--white);display:flex;align-items:center;gap:10px}
+
+.nav-links{display:flex;align-items:center;gap:28px;list-style:none}
+.nav-links > li > a{color:var(--white);font-weight:500;padding:10px 0;display:flex;align-items:center;gap:6px;transition:var(--trans)}
+.nav-links > li > a:hover{color:var(--orange)}
+
+
+li.drop-down{position:relative}
+.drop-down-content{
+  position:absolute;
+  top:100%;
+  left:0;
+  background:var(--white);
+  min-width:220px;
+  border-radius:8px;
+  box-shadow: var(--shadow);
+  opacity:0;
+  visibility:hidden;
+  transform:translateY(10px);
+  transition:opacity var(--trans), transform var(--trans), visibility var(--trans);
+  padding:8px 0;
+  pointer-events:none;
+  z-index:999
+}
+.drop-down-content ul{list-style:none}
+.drop-down-content li.nav-link a{
+  display:block;
+  padding:12px 20px;
+  color:var(--text);
+  font-size:15px;
+  transition:var(--trans)
+}
+.drop-down-content li.nav-link a:hover{background:var(--light);color:var(--orange);padding-left:24px}
+
+/* Show dropdown on hover of li or content */
+li.drop-down:hover .drop-down-content,
+.drop-down-content:hover{
+  opacity:1;
+  visibility:visible;
+  transform:translateY(0);
+  pointer-events:auto
+}
+
+.dropdown-icon{display:flex;transition:transform var(--trans)}
+li.drop-down:hover .dropdown-icon{transform:rotate(180deg)}
+
+.menu-toggle{display:none;font-size:26px;color:var(--white);cursor:pointer;background:none;border:none}
+.login-btn{background:var(--orange);padding:14px 28px;border-radius:30px;color:var(--white)!important;font-weight:600}
+.login-btn:hover{background:#e55a28;color:var(--white)!important}
+
+/* HERO */
+.hero{
+  background:linear-gradient(135deg, rgba(10,35,66,0.95) 0%, rgba(10,35,66,0.8) 100%), 
+  url('https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?q=80&w=1600') center/cover;
+  color:var(--white);
+  text-align:center;
+  padding:120px 0
+}
+.hero h1{color:var(--white);font-size:clamp(2.2rem,5vw,3.5rem);margin-bottom:20px;line-height:1.2}
+.hero p{max-width:700px;margin:0 auto 35px;font-size:18px;opacity:0.95}
+
+/* CAROUSEL */
+.carousel{
+  position:relative;
+  max-width:1200px;
+  margin:-60px auto 0;
+  border-radius:var(--radius);
+  overflow:hidden;
+  box-shadow:0 15px 50px rgba(0,0,0,0.15)
+}
+.carousel-track{
+  display:flex;
+  transition:transform 0.6s cubic-bezier(0.4,0,0.2,1)
+}
+.carousel-slide{
+  min-width:100%;
+  position:relative
+}
+.carousel-slide img{
+  width:100%;
+  height:500px;
+  object-fit:cover
+} 
+.carousel-btn{
+  position:absolute;
+  top:50%;
+  transform:translateY(-50%);
+  background:rgba(0,0,0,0.5);
+  color:var(--white);
+  border:none;
+  width:50px;
+  height:50px;
+  border-radius:50%;
+  font-size:22px;
+  cursor:pointer;
+  z-index:2;
+  transition:var(--trans)
+}
+.carousel-btn:hover{background:var(--orange)}
+.carousel-btn.prev{left:25px}
+.carousel-btn.next{right:25px} 
+.carousel-dots{
+  position:absolute;
+  bottom:25px;
+  left:50%;
+  transform:translateX(-50%);
+  display:flex;
+  gap:10px
+}
+.dot{
+  width:14px;
+  height:14px;
+  border-radius:50%;
+  background:rgba(255,255,255,0.5);
+  border:2px solid transparent;
+  cursor:pointer;
+  transition:var(--trans)
+}
+.dot.active{
+  background:var(--orange);
+  border-color:var(--white);
+  transform:scale(1.2)
+}
+
+/* MOBILE MENU */
+@media(max-width:992px){
+.menu-toggle{display:block}
+.nav-links{
+  position:fixed;
+  top:0;
+  right:-100%;
+  width:280px;
+  height:100vh;
+  background:var(--navy);
+  flex-direction:column;
+  align-items:flex-start;
+  padding:80px 25px 25px;
+  gap:0;
+  transition:right 0.1s ease;
+  overflow-y:auto
+}
+.nav-links.active{right:0}
+.nav-links > li{width:100%;border-bottom:1px solid rgba(255,255,255,0.1)}
+.nav-links > li > a{padding:16px 0;width:100%;justify-content:space-between}
+
+.drop-down-content{
+  position:static;
+  opacity:1;
+  visibility:visible;
+  transform:none;
+  display:flex;
+  box-shadow:none;
+  background:rgba(255,255,255,0.06);
+  margin:0 0 10px 0;
+  border-radius:6px
+}
+li.drop-down.active .drop-down-content{display:block}
+.drop-down-content li.nav-link a{color:var(--white);padding-left:35px;font-size:14px}
+.menu-close{position:absolute;top:20px;right:25px;font-size:28px}
+
+.login-btn{margin-top:20px;width:100%;text-align:center}
+}
+
+/* RESPONSIVE + MOBILE IMAGE RULE */
+@media(max-width:768px){
+  section{padding:70px 20px}
+  .hero h1{font-size:2rem}
+  
+  .carousel-slide img{height:300px}
+  
+  /* Mobile: show only first image, disable carousel */
+  .carousel-track{
+    transform:translateX(0)!important;
+    transition:none
+  }
+  .carousel-btn,
+  .carousel-dots{
+    display:none
+  }
+  .carousel-slide:not(:first-child){
+    display:none
+  }
+}
+
+/* FOOTER 4 COLS x 5+ ROWS */
+footer{background:var(--navy);color:var(--white);padding:70px 0 25px}
+.footer-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:40px}
+.footer-col h4{color:var(--orange);margin-bottom:18px;font-size:18px}
+.footer-col p{color:#CBD5E1;margin:10px 0;font-size:15px;line-height:1.7}
+.footer-col a{color:#CBD5E1;display:block;margin:10px 0;font-size:15px;transition:var(--trans)}
+.footer-col a:hover{color:var(--orange);padding-left:5px}
+.socials{display:flex;gap:15px;margin-top:15px}
+.socials a{font-size:22px}
+.copy{margin-top:50px;text-align:center;border-top:1px solid rgba(255,255,255,0.1);padding-top:25px;color:#94A3B8;font-size:14px}
+
+@media(max-width:900px){.footer-grid{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:600px){.footer-grid{grid-template-columns:1fr}}
+
+
+</style>
+</head>
+<body>
+
+<!-- NAVBAR -->
+<nav>
+  <div class="nav-wrap container">
+    <div class="logo">
+      <img src="/logo.png" alt="GlobalSwift Logo" style="width:100px;max-width:100px;height:70px;transition:all 0.3s ease;cursor:pointer;filter:drop-shadow(0 6px 12px rgba(0,0,0,0.15));">
+    </div>
+
+    <button class="menu-toggle" id="menuOpen"><i class="fa-solid fa-bars"></i></button>
+
+    <ul class="nav-links" id="navMenu">
+      <button class="menu-toggle menu-close" id="menuClose"><i class="fa-solid fa-xmark"></i></button>
+
+      <li class="drop-down">
+        <a href="index.html">Home <i class="fa-solid fa-chevron-down dropdown-icon"></i></a>
+        <div class="drop-down-content">
+          <ul>
+            <li class="nav-link">
+              <a href="dashboard.html">Dashboard</a>
+              <a href="overview.html">Company Overview</a>
+              <a href="updates.html">Latest Updates</a>
+            </li>
+          </ul>
+        </div>
+      </li>
+
+      <li class="drop-down">
+        <a href="about.html">About <i class="fa-solid fa-chevron-down dropdown-icon"></i></a>
+        <div class="drop-down-content">
+          <ul>
+            <li class="nav-link">
+              <a href="company.html">About Company</a>
+              <a href="team.html">Leadership Team</a>
+              <a href="careers.html">Careers</a>
+            </li>
+          </ul>
+        </div>
+      </li>
+
+      <li class="drop-down">
+        <a href="service.html">Service <i class="fa-solid fa-chevron-down dropdown-icon"></i></a>
+        <div class="drop-down-content">
+          <ul>
+            <li class="nav-link">
+              <a href="Air freight.html">Air Freight</a>
+              <a href="sea freight.html">Sea Freight</a>
+              <a href="road transport.html">road Transport</a>
+              <a href="/warehousing.html">Warehousing</a>
+            </li>
+          </ul>
+        </div>
+      </li>
+
+      <li class="drop-down">
+        <a href="tracking.html">Tracking <i class="fa-solid fa-chevron-down dropdown-icon"></i></a>
+        <div class="drop-down-content">
+          <ul>
+            <li class="nav-link">
+              <a href="/tracking system.html">Tracking System</a>
+              <a href="/secure delivery.html">Secure Delivery</a>
+              <a href="/support.html"> Support</a>
+            </li>
+          </ul>
+        </div>
+      </li>
+
+      <li class="drop-down">
+        <a href="blog.html">Blog <i class="fa-solid fa-chevron-down dropdown-icon"></i></a>
+        <div class="drop-down-content">
+          <ul>
+            <li class="nav-link">
+              <a href="/latest posts.html">Latest Posts</a>
+              <a href="/insights.html">Industry Insights</a>
+              <a href="/trends.html">Logistics Trends</a>
+            </li>
+          </ul>
+        </div>
+      </li>
+
+      <li class="drop-down">
+        <a href="contact.html">Contact <i class="fa-solid fa-chevron-down dropdown-icon"></i></a>
+        <div class="drop-down-content">
+          <ul>
+            <li class="nav-link">
+              <a href="/live chat.html">Live Chat</a>
+              <a href="/help center.html">Help Center</a>
+              <a href="/documentation.html">Global Offices</a>
+            </li>
+          </ul>
+        </div>
+      </li>
+
+      <li><a href="login.html" class="login-btn">Login</a></li>
+    </ul>
+  </div>
+</nav>
+
+<!-- HERO SECTION 1 -->
+<section class="hero">
+  <div class="container">
+    <h1>Your Cargo, Our Priority - Delivered Fast</h1>
+    <p>Global Swift Logistics provides end-to-end supply chain solutions across 180+ countries. Air, sea, and road freight with real-time tracking and 99.4% on-time delivery.</p>
+    <a href="contact.html" class="btn">Get Free Quote</a>
+  </div>
+</section>
+
+<!-- CAROUSEL SECTION 2 -->
+<section>
+  <div class="carousel">
+    <div class="carousel-track">
+      <div class="carousel-slide"><img src="https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?q=80&w=1600" alt="Container ship at port"></div>
+      <div class="carousel-slide"><img src="https://images.unsplash.com/photo-1436491865332-7a61a109cc05?q=80&w=1600" alt="Cargo plane loading"></div>
+      <div class="carousel-slide"><img src="https://images.unsplash.com/photo-1601581875309-fafbf2d3ed3a?q=80&w=1600" alt="Modern warehouse"></div>
+      <div class="carousel-slide"><img src="https://images.unsplash.com/photo-1566576912321-d58ddd7a6088?q=80&w=1600" alt="Delivery trucks fleet"></div>
+    </div>
+    <button class="carousel-btn prev"><i class="fa-solid fa-chevron-left"></i></button>
+    <button class="carousel-btn next"><i class="fa-solid fa-chevron-right"></i></button>
+    <div class="carousel-dots"></div>
+  </div>
+</section>
+
+
+<!-- SERVICES SECTION 3 -->
+<section>
+  <div class="container">
+    <h2>Our Logistics Services</h2>
+    <div class="grid">
+      <div class="card">
+        <i class="fa-solid fa-plane"></i>
+        <h3>Air Freight</h3>
+        <p>Express international shipping for urgent cargo. 24-72 hour delivery to 200+ destinations with cold chain and dangerous goods handling.</p>
+      </div>
+      <div class="card">
+        <i class="fa-solid fa-ship"></i>
+        <h3>Sea Freight</h3>
+        <p>Full container load and less than container load options. Competitive rates, port handling, and customs clearance included.</p>
+      </div>
+      <div class="card">
+        <i class="fa-solid fa-truck"></i>
+        <h3>Road Transport</h3>
+        <p>Cross-border and domestic trucking with GPS tracking. Flatbeds, reefers, and dry vans for last-mile delivery.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WHY US SECTION 4 -->
+<section>
+  <div class="container">
+    <h2>Why 15,000+ Businesses Trust Us</h2>
+    <div class="grid">
+      <div class="card">
+        <h3>99.4% On-Time Rate</h3>
+        <p>AI-powered route optimization and 24/7 control tower ensure your shipments arrive exactly when promised.</p>
+      </div>
+      <div class="card">
+        <h3>Live Tracking Portal</h3>
+        <p>Track every package from pickup to delivery. Automated alerts via SMS, email, and WhatsApp at every milestone.</p>
+      </div>
+      <div class="card">
+        <h3>Global Network</h3>
+        <p>Direct agents in 180+ countries. One account manager for your entire supply chain from origin to destination.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- STATS SECTION 5 -->
+<section>
+  <div class="container">
+    <div class="grid">
+      <div class="card"><h2 style="color:var(--orange);font-size:48px">180+</h2><p>Countries Served</p></div>
+      <div class="card"><h2 style="color:var(--orange);font-size:48px">2.8M</h2><p>Shipments/Year</p></div>
+      <div class="card"><h2 style="color:var(--orange);font-size:48px">15K+</h2><p>Happy Clients</p></div>
+      <div class="card"><h2 style="color:var(--orange);font-size:48px">24/7</h2><p>Support Available</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIALS SECTION 6 -->
+<section>
+  <div class="container">
+    <h2>Client Testimonials</h2>
+    <div class="grid">
+      <div class="card">
+        <p>"Cut our shipping costs by 32% and improved delivery times. Their tracking dashboard is a game changer."</p>
+        <h4>- Amanda Liu, TechTrade Inc</h4>
+      </div>
+      <div class="card">
+        <p>"Zero cargo damage in 4 years. Customs clearance is always smooth and documentation is perfect."</p>
+        <h4>- David Okafor, ImportPro NG</h4>
+      </div>
+      <div class="card">
+        <p>"Warehousing team is top-notch. Inventory management and order fulfillment have never been easier."</p>
+        <h4>- Sofia Martinez, FashionHub MX</h4>
+      </div>
+    </div>
+  </div>
+</section>
+<footer>
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-col">
+        <h4>Company</h4>
+        <p>Global Swift Logistics is a leading provider of international freight and supply chain solutions. With over 15,000 clients worldwide, we specialize in air, sea, and road transport, warehousing, and real-time tracking. Our mission is to deliver your cargo fast, reliably, and with exceptional service.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Quick Links</h4>
+        <a href="index.html">Home</a>
+        <a href="about.html">About Us</a>
+        <a href="/service.html">Service</a>
+        <a href="/tracking system.html">Tracking system</a>
+        <a href="contact.html">Contact</a>
+      </div>
+      <div class="footer-col">
+        <h4>Contact Us</h4>
+        <p>Email: info@globalswiftlogistics.com</p>
+        <p>Phone: +1 (555) 123-4567</p>
+      </div>
+        <div class="footer-col">
+            <h4>Follow Us</h4>
+            <div class="socials">
+            <a href="https://www.facebook.com/globalswiftlogistics"><i class="fa-brands fa-facebook-f"></i></a>
+            <a href="https://twitter.com/globalswiftlog"><i class="fa-brands fa-twitter"></i></a>
+            <a href="https://www.linkedin.com/company/globalswiftlogistics"><i class="fa-brands fa-linkedin-in"></i></a>
+            <a href="https://www.instagram.com/globalswiftlogistics"><i class="fa-brands fa-instagram"></i></a>
+            <a href="https://www.youtube.com/globalswiftlogistics"><i class="fa-brands fa-youtube"></i></a>
+            </div>
+    </div>
+    <div class="copy">© 2024 Global Swift Logistics. All rights reserved.</div>
+  </div>
+</footer>
+<script>
+// Mobile menu toggle: display icon -> cancel icon
+const menu = document.getElementById('navMenu');
+const openBtn = document.getElementById('menuOpen');
+const closeBtn = document.getElementById('menuClose');
+
+
+openBtn.addEventListener('click', () => {
+  menu.classList.add('active');
+  openBtn.style.display = 'none';
+  closeBtn.style.display = 'block';
+});
+
+closeBtn.addEventListener('click', () => {
+  menu.classList.remove('active');
+  closeBtn.style.display = 'none';
+  openBtn.style.display = 'block';
+});
+
+// Close menu when link clicked on mobile
+document.querySelectorAll('.nav-links a').forEach(link => {
+  link.addEventListener('click', () => {
+    if(window.innerWidth <= 980){
+      menu.classList.remove('active');
+      closeBtn.style.display = 'none';
+      openBtn.style.display = 'block';
+    }
+  });
+});
+
+// Carousel logic
+const track = document.querySelector('.carousel-track');
+const slides = Array.from(track.children);
+const nextBtn = document.querySelector('.carousel-btn.next');
+const prevBtn = document.querySelector('.carousel-btn.prev');
+const dotsNav = document.querySelector('.carousel-dots');
+
+let currentIndex = 0;
+
+// Create dots
+slides.forEach((_, i) => {
+  const dot = document.createElement('button');
+  dot.classList.add('dot');
+  if(i === 0) dot.classList.add('active');
+  dotsNav.appendChild(dot);
+});
+const dots = Array.from(dotsNav.children);
+
+function updateCarousel(){
+  track.style.transform = `translateX(-${currentIndex * 100}%)`;
+  dots.forEach(dot => dot.classList.remove('active'));
+  dots[currentIndex].classList.add('active');
+}
+
+nextBtn.addEventListener('click', () => {
+  currentIndex = (currentIndex + 1) % slides.length;
+  updateCarousel();
+});
+
+prevBtn.addEventListener('click', () => {
+  currentIndex = (currentIndex - 1 + slides.length) % slides.length;
+  updateCarousel();
+});
+
+dots.forEach((dot, i) => {
+  dot.addEventListener('click', () => {
+    currentIndex = i;
+    updateCarousel();
+  });
+});
+
+
+// Auto-slide every 2s
+setInterval(() => {
+  currentIndex = (currentIndex + 1) % slides.length;
+  updateCarousel();
+}, 3000);
+</script>
+
+
+</script>
+</body>
+</html>

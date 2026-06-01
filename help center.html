@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Help Center - GlobalSwift Logistics</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+<style>
+:root{
+  --primary:#0A2540;
+  --accent:#FF6B35;
+  --bg:#f4f7fb;
+}
+
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+  font-family:'Poppins',sans-serif;
+}
+
+body{
+  background:var(--bg);
+  color:#333;
+}
+
+/* HERO */
+.hero{
+  height:45vh;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  text-align:center;
+  color:#fff;
+  background:url("https://images.unsplash.com/photo-1556745757-8d76bdb6984b?auto=format&fit=crop&w=1600&q=80") center/cover no-repeat;
+  position:relative;
+}
+
+.hero::before{
+  content:"";
+  position:absolute;
+  inset:0;
+  background:linear-gradient(135deg,rgba(10,37,64,0.9),rgba(0,0,0,0.6));
+}
+
+.hero-content{
+  position:relative;
+  z-index:1;
+}
+
+.hero h1{
+  font-size:2.8rem;
+}
+
+/* SEARCH */
+.search{
+  text-align:center;
+  margin:25px;
+}
+
+.search input{
+  width:60%;
+  padding:14px;
+  border-radius:10px;
+  border:none;
+  box-shadow:0 10px 25px rgba(0,0,0,0.1);
+  outline:none;
+}
+
+/* SECTION */
+.section{
+  padding:70px 8%;
+}
+
+.section h2{
+  text-align:center;
+  margin-bottom:30px;
+  color:var(--primary);
+}
+
+/* GRID */
+.grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+  gap:20px;
+}
+
+.card{
+  background:#fff;
+  padding:20px;
+  border-radius:12px;
+  box-shadow:0 10px 30px rgba(0,0,0,0.08);
+  transition:0.3s;
+  cursor:pointer;
+}
+
+.card:hover{
+  transform:translateY(-6px);
+  background:#fff7f3;
+}
+
+/* FAQ */
+.faq{
+  max-width:800px;
+  margin:auto;
+}
+
+.item{
+  background:#fff;
+  margin-bottom:10px;
+  border-radius:10px;
+  overflow:hidden;
+  box-shadow:0 8px 20px rgba(0,0,0,0.05);
+}
+
+.question{
+  padding:15px;
+  cursor:pointer;
+  font-weight:600;
+  background:#f9fafb;
+}
+
+.answer{
+  max-height:0;
+  overflow:hidden;
+  transition:0.4s ease;
+  padding:0 15px;
+}
+
+.item.active .answer{
+  max-height:200px;
+  padding:15px;
+}
+
+/* CONTACT */
+.contact{
+  background:#fff;
+  padding:30px;
+  border-radius:12px;
+  max-width:800px;
+  margin:auto;
+  box-shadow:0 10px 30px rgba(0,0,0,0.08);
+}
+
+.contact input,
+.contact textarea{
+  width:100%;
+  padding:12px;
+  margin-top:10px;
+  border-radius:8px;
+  border:1px solid #ddd;
+}
+
+.btn{
+  margin-top:15px;
+  padding:10px 15px;
+  background:var(--primary);
+  color:#fff;
+  border:none;
+  border-radius:20px;
+  cursor:pointer;
+}
+
+/* FOOTER */
+footer{
+  background:var(--primary);
+  color:#fff;
+  text-align:center;
+  padding:30px;
+  margin-top:50px;
+}
+
+/* ANIMATION */
+.fade{
+  opacity:0;
+  transform:translateY(30px);
+  transition:0.6s;
+}
+
+.show{
+  opacity:1;
+  transform:translateY(0);
+}
+
+/* MOBILE */
+@media(max-width:768px){
+  .search input{width:90%;}
+  .hero h1{font-size:2rem;}
+}
+</style>
+</head>
+
+<body>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-content">
+    <h1 id="typing"></h1>
+    <p>Find answers, track help, and get support instantly.</p>
+  </div>
+</section>
+
+<!-- SEARCH -->
+<div class="search">
+  <input placeholder="Search help topics... (tracking, delivery, payment)">
+</div>
+
+<!-- HELP TOPICS -->
+<section class="section">
+<h2>Help Categories</h2>
+
+<div class="grid">
+
+  <div class="card">📦 Tracking Issues</div>
+  <div class="card">🚚 Delivery Problems</div>
+  <div class="card">💳 Payment & Billing</div>
+  <div class="card">🔐 Account Security</div>
+
+</div>
+</section>
+
+<!-- FAQ -->
+<section class="section">
+<h2>Frequently Asked Questions</h2>
+
+<div class="faq fade">
+
+  <div class="item">
+    <div class="question">How do I track my shipment?</div>
+    <div class="answer">Enter your tracking ID in the tracking page to see real-time updates.</div>
+  </div>
+
+  <div class="item">
+    <div class="question">Why is my shipment delayed?</div>
+    <div class="answer">Delays may occur due to customs clearance or weather conditions.</div>
+  </div>
+
+  <div class="item">
+    <div class="question">How do I contact support?</div>
+    <div class="answer">Use the contact form below or email support@globalswift.com</div>
+  </div>
+
+</div>
+</section>
+
+<!-- CONTACT -->
+<section class="section">
+<h2>Contact Support</h2>
+
+<div class="contact fade">
+
+  <input placeholder="Your Name">
+  <input placeholder="Email Address">
+  <textarea rows="5" placeholder="Describe your issue..."></textarea>
+
+  <button class="btn">Send Message</button>
+
+</div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <p>© 2026 GlobalSwift Help Center</p>
+</footer>
+
+<script>
+
+/* TYPING */
+const text="Global Help Center";
+let i=0;
+
+function type(){
+  if(i<text.length){
+    document.getElementById("typing").innerHTML+=text.charAt(i);
+    i++;
+    setTimeout(type,70);
+  }
+}
+type();
+
+/* FAQ TOGGLE */
+document.querySelectorAll(".item").forEach(item=>{
+  item.addEventListener("click",()=>{
+    item.classList.toggle("active");
+  });
+});
+
+/* SCROLL ANIMATION */
+const fade=document.querySelectorAll(".fade");
+
+const observer=new IntersectionObserver(entries=>{
+  entries.forEach(e=>{
+    if(e.isIntersecting){
+      e.target.classList.add("show");
+    }
+  });
+},{threshold:0.2});
+
+fade.forEach(f=>observer.observe(f));
+
+</script>
+
+</body>
+</html>

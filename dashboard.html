@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GlobalSwift Dashboard System</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+
+<style>
+:root{
+  --primary:#0A2540;
+  --accent:#FF6B35;
+  --bg:#f4f7fb;
+}
+
+*{margin:0;padding:0;box-sizing:border-box;font-family:'Poppins',sans-serif;}
+
+body{display:flex;background:var(--bg);}
+
+/* SIDEBAR */
+.sidebar{
+  width:240px;
+  background:var(--primary);
+  color:#fff;
+  height:100vh;
+  padding:20px;
+  position:fixed;
+}
+
+.sidebar h2{margin-bottom:30px;}
+
+.sidebar a{
+  display:block;
+  color:#fff;
+  margin:15px 0;
+  text-decoration:none;
+  opacity:.8;
+}
+
+.sidebar a:hover{opacity:1;}
+
+/* MAIN */
+.main{
+  margin-left:240px;
+  padding:20px;
+  width:100%;
+}
+
+/* TOPBAR */
+.topbar{
+  display:flex;
+  justify-content:space-between;
+  margin-bottom:20px;
+}
+
+input, select{
+  padding:8px;
+  border-radius:6px;
+  border:1px solid #ccc;
+}
+
+/* CARDS */
+.cards{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
+  gap:15px;
+}
+
+.card{
+  background:#fff;
+  padding:15px;
+  border-radius:10px;
+  box-shadow:0 5px 15px rgba(0,0,0,.08);
+}
+
+/* TABLE */
+.table{
+  margin-top:20px;
+  background:#fff;
+  padding:15px;
+  border-radius:10px;
+}
+
+table{
+  width:100%;
+  border-collapse:collapse;
+}
+
+th,td{padding:10px;}
+
+.status{
+  padding:5px 10px;
+  border-radius:20px;
+  font-size:12px;
+}
+
+.pending{background:#fff3cd;}
+.transit{background:#cce5ff;}
+.delivered{background:#d4edda;}
+
+button{
+  padding:5px 10px;
+  border:none;
+  border-radius:5px;
+  cursor:pointer;
+}
+
+.add-btn{background:var(--accent);color:#fff;}
+.delete{background:red;color:#fff;}
+
+@media(max-width:768px){
+  .sidebar{display:none;}
+  .main{margin-left:0;}
+}
+</style>
+</head>
+
+<body>
+
+<div class="sidebar">
+  <h2>GlobalSwift</h2>
+  <a href="#">Dashboard</a>
+  <a href="shipments.html">Shipments</a>
+</div>
+
+<div class="main">
+
+  <div class="topbar">
+    <input type="text" id="search" placeholder="Search shipments...">
+    <button class="add-btn" onclick="addShipment()">+ Add Shipment</button>
+  </div>
+
+  <!-- STATS -->
+  <div class="cards">
+    <div class="card"><h4>Total</h4><p id="total">0</p></div>
+    <div class="card"><h4>Transit</h4><p id="transit">0</p></div>
+    <div class="card"><h4>Delivered</h4><p id="delivered">0</p></div>
+  </div>
+
+  <!-- TABLE -->
+  <div class="table">
+    <h3>Shipments</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Customer</th>
+          <th>Location</th>
+          <th>Status</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+      <tbody id="tableBody"></tbody>
+    </table>
+  </div>
+
+</div>
+
+<script>
+let shipments = JSON.parse(localStorage.getItem("shipments")) || [
+  {id:"GS101",name:"John",loc:"Lagos",status:"pending"},
+  {id:"GS102",name:"Ada",loc:"Abuja",status:"transit"},
+  {id:"GS103",name:"Mike",loc:"Kano",status:"delivered"}
+];
+
+function save(){
+  localStorage.setItem("shipments",JSON.stringify(shipments));
+}
+
+function render(){
+  const body = document.getElementById("tableBody");
+  body.innerHTML = "";
+
+  let total=shipments.length, t=0, d=0;
+
+  shipments.forEach((s,i)=>{
+    if(s.status==="transit") t++;
+    if(s.status==="delivered") d++;
+
+    body.innerHTML += `
+      <tr>
+        <td>${s.id}</td>
+        <td>${s.name}</td>
+        <td>${s.loc}</td>
+        <td>
+          <select onchange="updateStatus(${i},this.value)">
+            <option ${s.status==="pending"?"selected":""}>pending</option>
+            <option ${s.status==="transit"?"selected":""}>transit</option>
+            <option ${s.status==="delivered"?"selected":""}>delivered</option>
+          </select>
+        </td>
+        <td>
+          <button class="delete" onclick="del(${i})">Delete</button>
+        </td>
+      </tr>
+    `;
+  });
+
+  document.getElementById("total").innerText = total;
+  document.getElementById("transit").innerText = t;
+  document.getElementById("delivered").innerText = d;
+
+  save();
+}
+
+function addShipment(){
+  let name = prompt("Customer Name");
+  let loc = prompt("Location");
+
+  if(!name || !loc) return;
+
+  shipments.push({
+    id:"GS"+Math.floor(Math.random()*1000),
+    name, loc, status:"pending"
+  });
+
+  render();
+}
+
+function updateStatus(i,val){
+  shipments[i].status = val;
+  render();
+}
+
+function del(i){
+  shipments.splice(i,1);
+  render();
+}
+
+/* SEARCH */
+document.getElementById("search").addEventListener("input",function(){
+  let val = this.value.toLowerCase();
+  document.querySelectorAll("#tableBody tr").forEach(row=>{
+    row.style.display = row.innerText.toLowerCase().includes(val) ? "" : "none";
+  });
+});
+
+render();
+</script>
+
+</body>
+</html>

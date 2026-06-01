@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Air Freight - GlobalSwift Logistics</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+<style>
+:root{
+  --primary:#0A2540;
+  --accent:#FF6B35;
+  --bg:#f4f7fb;
+}
+
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+  font-family:'Poppins',sans-serif;
+}
+
+body{
+  background:var(--bg);
+  color:#333;
+  overflow-x:hidden;
+}
+
+/* HERO */
+.hero{
+  height:70vh;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  text-align:center;
+  color:#fff;
+  background:url("https://images.unsplash.com/photo-1508610048659-a06b669e3321?auto=format&fit=crop&w=1600&q=80") center/cover no-repeat;
+  position:relative;
+}
+
+.hero::before{
+  content:"";
+  position:absolute;
+  inset:0;
+  background:linear-gradient(135deg,rgba(10,37,64,0.85),rgba(0,0,0,0.6));
+}
+
+.hero-content{
+  position:relative;
+  z-index:1;
+}
+
+.hero h1{
+  font-size:3rem;
+}
+
+/* SECTION */
+.section{
+  padding:80px 8%;
+}
+
+.section h2{
+  text-align:center;
+  margin-bottom:40px;
+  color:var(--primary);
+}
+
+/* GRID */
+.grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+  gap:20px;
+}
+
+/* CARD */
+.card{
+  background:#fff;
+  padding:20px;
+  border-radius:12px;
+  box-shadow:0 10px 30px rgba(0,0,0,0.08);
+  transition:0.3s;
+  transform:translateY(40px);
+  opacity:0;
+}
+
+.card:hover{
+  transform:translateY(-8px);
+}
+
+.card h3{
+  margin-bottom:10px;
+}
+
+/* AIR ROUTE VISUAL */
+.route{
+  background:#fff;
+  padding:30px;
+  border-radius:12px;
+  text-align:center;
+  box-shadow:0 10px 30px rgba(0,0,0,0.08);
+}
+
+.line{
+  height:4px;
+  background:var(--accent);
+  width:80%;
+  margin:30px auto;
+  position:relative;
+  border-radius:10px;
+}
+
+.plane{
+  position:absolute;
+  top:-18px;
+  left:0;
+  font-size:22px;
+  animation:fly 4s infinite linear;
+}
+
+@keyframes fly{
+  0%{left:0}
+  100%{left:95%}
+}
+
+/* PRICING */
+.pricing{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+  gap:20px;
+}
+
+.plan{
+  background:#fff;
+  padding:25px;
+  border-radius:12px;
+  text-align:center;
+  box-shadow:0 10px 30px rgba(0,0,0,0.08);
+  transition:0.3s;
+}
+
+.plan:hover{
+  transform:scale(1.05);
+}
+
+.price{
+  font-size:2rem;
+  color:var(--accent);
+  margin:10px 0;
+}
+
+.btn{
+  display:inline-block;
+  margin-top:10px;
+  padding:10px 15px;
+  background:var(--primary);
+  color:#fff;
+  border-radius:20px;
+  text-decoration:none;
+}
+
+/* TRACKING STATUS */
+.status{
+  background:#fff;
+  padding:30px;
+  border-radius:12px;
+  box-shadow:0 10px 30px rgba(0,0,0,0.08);
+}
+
+.step{
+  margin:15px 0;
+  padding:10px;
+  border-left:4px solid var(--accent);
+}
+
+/* ANIMATION */
+.show{
+  opacity:1 !important;
+  transform:translateY(0) !important;
+}
+
+/* FOOTER */
+footer{
+  background:var(--primary);
+  color:#fff;
+  text-align:center;
+  padding:30px;
+  margin-top:50px;
+}
+
+/* MOBILE */
+@media(max-width:768px){
+  .hero h1{font-size:2rem;}
+}
+</style>
+</head>
+
+<body>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-content">
+    <h1 id="typing"></h1>
+    <p>Fast global air cargo delivery with precision tracking.</p>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section class="section">
+  <h2>Air Freight Services</h2>
+
+  <div class="grid">
+
+    <div class="card">
+      <h3>✈️ Express Air Cargo</h3>
+      <p>Fast international delivery for urgent shipments.</p>
+    </div>
+
+    <div class="card">
+      <h3>📦 Standard Air Freight</h3>
+      <p>Cost-effective global shipping for regular cargo.</p>
+    </div>
+
+    <div class="card">
+      <h3>🛩️ Charter Services</h3>
+      <p>Dedicated aircraft for bulk or sensitive shipments.</p>
+    </div>
+
+  </div>
+</section>
+
+<!-- ROUTE VISUAL -->
+<section class="section">
+  <h2>Live Air Route Tracking</h2>
+
+  <div class="route">
+    <p>Origin → Transit → Destination</p>
+
+    <div class="line">
+      <div class="plane">✈️</div>
+    </div>
+
+    <p>📍 Lagos → Dubai → London</p>
+  </div>
+</section>
+
+<!-- STATUS -->
+<section class="section">
+  <h2>Shipment Status</h2>
+
+  <div class="status">
+
+    <div class="step">✔ Package Collected</div>
+    <div class="step">✔ Airport Processing</div>
+    <div class="step">✈ In Transit (Airborne)</div>
+    <div class="step">⏳ Customs Clearance</div>
+
+  </div>
+</section>
+
+<!-- PRICING -->
+<section class="section">
+  <h2>Air Freight Pricing</h2>
+
+  <div class="pricing">
+
+    <div class="plan">
+      <h3>Economy</h3>
+      <div class="price">$80</div>
+      <p>Standard delivery</p>
+      <a href="#" class="btn">Select</a>
+    </div>
+
+    <div class="plan">
+      <h3>Business</h3>
+      <div class="price">$150</div>
+      <p>Faster delivery priority</p>
+      <a href="#" class="btn">Select</a>
+    </div>
+
+    <div class="plan">
+      <h3>Premium</h3>
+      <div class="price">$300</div>
+      <p>Express + priority handling</p>
+      <a href="#" class="btn">Select</a>
+    </div>
+
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <p>© 2026 GlobalSwift Air Freight Division</p>
+</footer>
+
+<script>
+
+/* TYPING EFFECT */
+const text="Global Air Freight Solutions";
+let i=0;
+function type(){
+  if(i<text.length){
+    document.getElementById("typing").innerHTML+=text.charAt(i);
+    i++;
+    setTimeout(type,70);
+  }
+}
+type();
+
+/* SCROLL ANIMATION */
+const items=document.querySelectorAll(".card");
+
+const observer=new IntersectionObserver(entries=>{
+  entries.forEach(e=>{
+    if(e.isIntersecting){
+      e.target.classList.add("show");
+    }
+  });
+},{threshold:0.2});
+
+items.forEach(i=>observer.observe(i));
+
+</script>
+
+</body>
+</html>

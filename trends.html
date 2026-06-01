@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Trends - GlobalSwift Logistics</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+<style>
+:root{
+  --primary:#0A2540;
+  --accent:#FF6B35;
+  --bg:#f4f7fb;
+  --success:#22c55e;
+}
+
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+  font-family:'Poppins',sans-serif;
+}
+
+body{
+  background:var(--bg);
+  color:#333;
+}
+
+/* HERO */
+.hero{
+  height:50vh;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  text-align:center;
+  color:#fff;
+  background:url("https://images.unsplash.com/photo-1494412651409-8963ce7935a7?auto=format&fit=crop&w=1600&q=80") center/cover no-repeat;
+  position:relative;
+}
+
+.hero::before{
+  content:"";
+  position:absolute;
+  inset:0;
+  background:linear-gradient(135deg,rgba(10,37,64,0.9),rgba(0,0,0,0.6));
+}
+
+.hero-content{
+  position:relative;
+  z-index:1;
+}
+
+.hero h1{
+  font-size:2.8rem;
+}
+
+/* SECTION */
+.section{
+  padding:70px 8%;
+}
+
+/* GRID */
+.grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+  gap:20px;
+}
+
+/* CARD */
+.card{
+  background:#fff;
+  padding:25px;
+  border-radius:12px;
+  box-shadow:0 10px 30px rgba(0,0,0,0.08);
+  transition:0.3s;
+}
+
+.card:hover{
+  transform:translateY(-6px);
+}
+
+/* TREND BAR */
+.bar{
+  height:6px;
+  background:#ddd;
+  border-radius:10px;
+  margin-top:10px;
+  overflow:hidden;
+}
+
+.bar span{
+  display:block;
+  height:100%;
+  background:linear-gradient(90deg,var(--accent),var(--primary));
+}
+
+/* TIMELINE */
+.timeline{
+  border-left:3px solid var(--accent);
+  padding-left:20px;
+}
+
+.timeline-item{
+  margin-bottom:20px;
+}
+
+.timeline-item h4{
+  color:var(--primary);
+}
+
+/* PREDICTION */
+.prediction{
+  background:#fff;
+  padding:30px;
+  border-radius:12px;
+  margin-top:30px;
+  box-shadow:0 10px 30px rgba(0,0,0,0.08);
+}
+
+/* FOOTER */
+footer{
+  background:var(--primary);
+  color:#fff;
+  text-align:center;
+  padding:30px;
+  margin-top:50px;
+}
+
+/* ANIMATION */
+.fade{
+  opacity:0;
+  transform:translateY(30px);
+  transition:0.6s;
+}
+
+.show{
+  opacity:1;
+  transform:translateY(0);
+}
+
+/* CENTER HEADING */
+.center-heading{
+  text-align:center;
+  color:var(--primary);
+}
+
+/* WIDTH SPANS */
+.width-85{width:85%;}
+.width-75{width:75%;}
+.width-70{width:70%;}
+
+/* MOBILE */
+@media(max-width:768px){
+  .hero h1{font-size:2rem;}
+}
+</style>
+</head>
+
+<body>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-content">
+    <h1 id="typing"></h1>
+    <p>Exploring the future of global logistics and supply chain innovation.</p>
+  </div>
+</section>
+
+<!-- TREND CARDS -->
+<section class="section">
+
+<div class="grid fade">
+
+  <div class="card">
+    <h3>🤖 AI Automation</h3>
+    <p>Smart logistics powered by artificial intelligence.</p>
+    <div class="bar"><span class="width-85"></span></div>
+  </div>
+
+  <div class="card">
+    <h3>🚚 Smart Delivery</h3>
+    <p>Real-time tracking and route optimization.</p>
+    <div class="bar"><span class="width-75"></span></div>
+  </div>
+
+  <div class="card">
+    <h3>🌍 Global Expansion</h3>
+    <p>Increased cross-border trade and logistics demand.</p>
+    <div class="bar"><span class="width-70"></span></div>
+  </div>
+
+</div>
+
+</section>
+
+<!-- TIMELINE -->
+<section class="section">
+
+<h2 class="center-heading">Industry Evolution</h2>
+
+<div class="timeline fade">
+
+  <div class="timeline-item">
+    <h4>2022</h4>
+    <p>Adoption of digital tracking systems globally.</p>
+  </div>
+
+  <div class="timeline-item">
+    <h4>2024</h4>
+    <p>Automation in warehousing and smart inventory.</p>
+  </div>
+
+  <div class="timeline-item">
+    <h4>2026</h4>
+    <p>AI-driven logistics and predictive delivery systems.</p>
+  </div>
+
+</div>
+
+</section>
+
+<!-- FUTURE -->
+<section class="section">
+
+<div class="prediction fade">
+  <h3>🚀 Future Outlook</h3>
+  <p>
+    The logistics industry is shifting toward fully automated systems, autonomous delivery, 
+    and blockchain-powered supply chains, ensuring transparency and efficiency.
+  </p>
+</div>
+
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <p>© 2026 GlobalSwift Logistics Trends Report</p>
+</footer>
+
+<script>
+
+/* TYPING */
+const text="Logistics Trends & Future Insights";
+let i=0;
+
+function type(){
+  if(i<text.length){
+    document.getElementById("typing").innerHTML+=text.charAt(i);
+    i++;
+    setTimeout(type,70);
+  }
+}
+type();
+
+/* ANIMATION */
+const fade=document.querySelectorAll(".fade");
+
+const observer=new IntersectionObserver(entries=>{
+  entries.forEach(e=>{
+    if(e.isIntersecting){
+      e.target.classList.add("show");
+    }
+  });
+},{threshold:0.2});
+
+fade.forEach(f=>observer.observe(f));
+
+</script>
+
+</body>
+</html>

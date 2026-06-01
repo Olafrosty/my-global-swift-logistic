@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Login - GlobalSwift SaaS</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+<style>
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+  font-family:'Poppins',sans-serif;
+}
+
+body{
+  height:100vh;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  background:linear-gradient(135deg,#0A2540,#122c4d);
+}
+
+/* CONTAINER */
+.wrapper{
+  display:flex;
+  width:900px;
+  background:#fff;
+  border-radius:15px;
+  overflow:hidden;
+  box-shadow:0 25px 60px rgba(0,0,0,0.25);
+}
+
+/* LEFT PANEL */
+.left{
+  flex:1;
+  background:linear-gradient(135deg,#0A2540,#1c3f66);
+  color:#fff;
+  padding:50px;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+}
+
+.left h1{
+  font-size:2.2rem;
+  margin-bottom:10px;
+}
+
+.left p{
+  opacity:0.8;
+  line-height:1.6;
+}
+
+/* RIGHT PANEL */
+.right{
+  flex:1;
+  padding:50px;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+}
+
+.right h2{
+  margin-bottom:20px;
+  color:#0A2540;
+}
+
+/* FORM */
+form{
+  display:flex;
+  flex-direction:column;
+  gap:15px;
+}
+
+input{
+  padding:12px;
+  border:1px solid #ddd;
+  border-radius:8px;
+  outline:none;
+  transition:0.3s;
+}
+
+input:focus{
+  border-color:#FF6B35;
+  box-shadow:0 0 8px rgba(255,107,53,0.2);
+}
+
+/* PASSWORD WRAP */
+.pass-wrap{
+  position:relative;
+}
+
+.toggle{
+  position:absolute;
+  right:10px;
+  top:50%;
+  transform:translateY(-50%);
+  cursor:pointer;
+  font-size:13px;
+  color:#666;
+}
+
+/* BUTTON */
+button{
+  padding:12px;
+  background:#FF6B35;
+  color:#fff;
+  border:none;
+  border-radius:8px;
+  cursor:pointer;
+  font-weight:600;
+  transition:0.3s;
+}
+
+button:hover{
+  transform:translateY(-2px);
+  box-shadow:0 10px 25px rgba(255,107,53,0.3);
+}
+
+/* LINKS */
+.links{
+  display:flex;
+  justify-content:space-between;
+  font-size:13px;
+  margin-top:10px;
+}
+
+.links a{
+  text-decoration:none;
+  color:#0A2540;
+  opacity:0.8;
+}
+
+.links a:hover{
+  opacity:1;
+}
+
+/* LOADING */
+.loading{
+  display:none;
+  font-size:13px;
+  color:#666;
+  text-align:center;
+}
+
+/* ANIMATION */
+@keyframes fadeIn{
+  from{opacity:0; transform:translateY(15px);}
+  to{opacity:1; transform:translateY(0);}
+}
+
+/* MOBILE */
+@media(max-width:768px){
+  .wrapper{
+    flex-direction:column;
+    width:90%;
+  }
+
+  .left{
+    padding:30px;
+  }
+
+  .right{
+    padding:30px;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<div class="wrapper">
+
+  <!-- LEFT SIDE -->
+  <div class="left">
+    <h1>Welcome Back 👋</h1>
+    <p>
+      Login to access your GlobalSwift dashboard, manage shipments,
+      chat system, analytics, and logistics operations in real time.
+    </p>
+  </div>
+
+  <!-- RIGHT SIDE -->
+  <div class="right">
+
+    <h2>Login</h2>
+
+    <form onsubmit="login(event)">
+
+      <input type="email" id="email" placeholder="Email Address" required>
+
+      <div class="pass-wrap">
+        <input type="password" id="password" placeholder="Password" required>
+        <span class="toggle" onclick="togglePass()">Show</span>
+      </div>
+
+      <button type="submit" id="btn">Sign In</button>
+
+      <div class="loading" id="loading">Signing you in...</div>
+
+      <div class="links">
+        <a href="#">Forgot password?</a>
+        <a href="signup.html">Create account</a>
+      </div>
+
+    </form>
+
+  </div>
+
+</div>
+
+<script>
+
+// TOGGLE PASSWORD
+function togglePass(){
+  const passInput=document.getElementById("password");
+  const toggleText=document.querySelector(".toggle");
+
+  if(passInput.type==="password"){
+    passInput.type="text";
+    toggleText.textContent="Hide";
+  }else{
+    passInput.type="password";
+    toggleText.textContent="Show";
+  }
+}
+// LOGIN FUNCTION
+function login(e){
+  e.preventDefault();
+  const btn=document.getElementById("btn");
+  const loading=document.getElementById("loading");
+
+  btn.style.display="none";
+  loading.style.display="block";
+
+  // Simulate login delay
+  setTimeout(()=>{
+    alert("Login successful! Redirecting to dashboard...");
+    // Here you would typically redirect to the dashboard
+    // window.location.href = "dashboard.html";
+    btn.style.display="block";
+    loading.style.display="none";
+  },2000);
+}
+</script>
+
+</body>
+</html>

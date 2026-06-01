@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Shipments - GlobalSwift</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+
+<style>
+:root{
+  --primary:#0A2540;
+  --accent:#FF6B35;
+  --bg:#f4f7fb;
+  --card:#fff;
+}
+
+/* RESET */
+*{margin:0;padding:0;box-sizing:border-box;font-family:Poppins;}
+
+body{background:var(--bg);padding:20px;}
+
+/* HEADER */
+.header{
+  display:flex;
+  justify-content:space-between;
+  margin-bottom:20px;
+}
+
+/* BUTTON */
+button{
+  padding:10px 15px;
+  border:none;
+  background:var(--accent);
+  color:#fff;
+  border-radius:6px;
+  cursor:pointer;
+}
+
+/* FORM */
+.form{
+  background:var(--card);
+  padding:15px;
+  border-radius:10px;
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
+  gap:10px;
+  margin-bottom:20px;
+}
+
+.form input, .form select{
+  padding:10px;
+  border-radius:6px;
+  border:1px solid #ccc;
+}
+
+/* TABLE */
+.table{
+  background:#fff;
+  padding:15px;
+  border-radius:10px;
+}
+
+table{width:100%;border-collapse:collapse;}
+th,td{padding:12px;text-align:left;}
+
+/* STATUS */
+.status{
+  padding:5px 10px;
+  border-radius:20px;
+  font-size:12px;
+}
+
+.pending{background:#fff3cd;}
+.transit{background:#cce5ff;}
+.delivered{background:#d4edda;}
+
+/* ACTIONS */
+.actions button{
+  margin-right:5px;
+}
+
+/* MODAL */
+.modal{
+  position:fixed;
+  inset:0;
+  background:#0007;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  opacity:0;
+  visibility:hidden;
+  transition:.3s;
+}
+
+.modal.active{
+  opacity:1;
+  visibility:visible;
+}
+
+.modal-box{
+  background:#fff;
+  padding:20px;
+  border-radius:10px;
+  width:300px;
+}
+
+/* TOAST */
+.toast{
+  position:fixed;
+  bottom:20px;
+  right:20px;
+  background:#28a745;
+  color:#fff;
+  padding:10px 20px;
+  border-radius:6px;
+  opacity:0;
+  transition:.3s;
+}
+
+.toast.show{opacity:1;}
+
+/* MOBILE */
+@media(max-width:768px){
+  table{font-size:12px;}
+}
+</style>
+</head>
+
+<body>
+
+<div class="header">
+  <h2>Shipment Management</h2>
+</div>
+
+<!-- FORM -->
+<div class="form">
+  <input id="name" placeholder="Customer Name">
+  <input id="location" placeholder="Location">
+  <select id="status">
+    <option value="pending">Pending</option>
+    <option value="transit">Transit</option>
+    <option value="delivered">Delivered</option>
+  </select>
+  <button onclick="addShipment()">Add Shipment</button>
+</div>
+
+<!-- SEARCH -->
+<input id="search" placeholder="Search..." style="margin-bottom:10px;padding:10px;width:100%;">
+
+<!-- TABLE -->
+<div class="table">
+  <table>
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Location</th>
+        <th>Status</th>
+        <th>Action</th>
+      </tr>
+    </thead>
+    <tbody id="table"></tbody>
+  </table>
+</div>
+
+<!-- MODAL -->
+<div class="modal" id="modal">
+  <div class="modal-box">
+    <h3>Edit Shipment</h3>
+    <input id="editName">
+    <input id="editLocation">
+    <select id="editStatus">
+      <option value="pending">Pending</option>
+      <option value="transit">Transit</option>
+      <option value="delivered">Delivered</option>
+    </select>
+    <button onclick="updateShipment()">Save</button>
+  </div>
+</div>
+
+<div class="toast" id="toast">Updated successfully</div>
+
+<script>
+let currentId=null;
+
+/* LOAD */
+async function load(){
+  let res = await fetch("/api/shipments");
+  let data = await res.json();
+
+  let html="";
+  data.forEach(s=>{
+    html+=`
+    <tr>
+      <td>${s.id}</td>
+      <td>${s.name}</td>
+      <td>${s.location}</td>
+      <td><span class="status ${s.status}">${s.status}</span></td>
+      <td class="actions">
+        <button onclick="openEdit('${s.id}','${s.name}','${s.location}','${s.status}')">Edit</button>
+        <button onclick="del('${s.id}')">Delete</button>
+      </td>
+    </tr>
+    `;
+  });
+
+  document.getElementById("table").innerHTML=html;
+}
+
+/* ADD */
+async function addShipment(){
+  let name=document.getElementById("name").value;
+  let location=document.getElementById("location").value;
+
+  await fetch("/api/shipments",{
+    method:"POST",
+    headers:{"Content-Type":"application/json"},
+    body:JSON.stringify({name,location})
+  });
+
+  showToast("Shipment added");
+  load();
+}
+
+/* DELETE */
+async function del(id){
+  await fetch(`/api/shipments/${id}`,{method:"DELETE"});
+  showToast("Deleted");
+  load();
+}
+
+/* EDIT */
+function openEdit(id,name,location,status){
+  currentId=id;
+  document.getElementById("editName").value=name;
+  document.getElementById("editLocation").value=location;
+  document.getElementById("editStatus").value=status;
+  document.getElementById("modal").classList.add("active");
+}
+
+/* UPDATE */
+async function updateShipment(){
+  let name=document.getElementById("editName").value;
+  let location=document.getElementById("editLocation").value;
+  let status=document.getElementById("editStatus").value;
+
+  await fetch(`/api/shipments/${currentId}`,{
+    method:"PUT",
+    headers:{"Content-Type":"application/json"},
+    body:JSON.stringify({name,location,status})
+  });
+
+  document.getElementById("modal").classList.remove("active");
+  showToast("Updated successfully");
+  load();
+}
+
+/* SEARCH */
+document.getElementById("search").addEventListener("input",function(){
+  let val=this.value.toLowerCase();
+  document.querySelectorAll("#table tr").forEach(row=>{
+    row.style.display=row.innerText.toLowerCase().includes(val)?"":"none";
+  });
+});
+
+/* TOAST */
+function showToast(msg){
+  let t=document.getElementById("toast");
+  t.innerText=msg;
+  t.classList.add("show");
+  setTimeout(()=>t.classList.remove("show"),2000);
+}
+
+load();
+</script>
+
+</body>
+</html>

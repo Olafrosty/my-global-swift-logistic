@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Our Team - GlobalSwift Logistics</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+<style>
+:root{
+  --primary:#0A2540;
+  --accent:#FF6B35;
+  --bg:#f4f7fb;
+}
+
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+  font-family:'Poppins',sans-serif;
+}
+
+body{
+  background:var(--bg);
+  color:#333;
+  overflow-x:hidden;
+}
+
+/* HERO */
+.hero{
+  height:60vh;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  text-align:center;
+  color:#fff;
+  background:url("https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=1600&q=80") center/cover no-repeat;
+  position:relative;
+}
+
+.hero::before{
+  content:"";
+  position:absolute;
+  inset:0;
+  background:linear-gradient(135deg,rgba(10,37,64,0.85),rgba(0,0,0,0.6));
+}
+
+.hero-content{
+  position:relative;
+  z-index:1;
+}
+
+.hero h1{
+  font-size:2.8rem;
+}
+
+/* SECTION */
+.section{
+  padding:80px 8%;
+}
+
+.section h2{
+  text-align:center;
+  margin-bottom:40px;
+  color:var(--primary);
+}
+
+/* GRID */
+.team-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+  gap:25px;
+}
+
+/* CARD */
+.card{
+  background:#fff;
+  border-radius:15px;
+  overflow:hidden;
+  text-align:center;
+  box-shadow:0 10px 30px rgba(0,0,0,0.08);
+  transform:translateY(40px);
+  opacity:0;
+  transition:0.6s ease;
+}
+
+.card img{
+  width:100%;
+  height:260px;
+  object-fit:cover;
+  transition:0.4s;
+}
+
+/* HOVER EFFECT */
+.card:hover img{
+  transform:scale(1.1);
+}
+
+.card:hover{
+  transform:translateY(-10px) scale(1.02);
+  box-shadow:0 20px 50px rgba(0,0,0,0.15);
+}
+
+.card h3{
+  margin:15px 0 5px;
+}
+
+.card p{
+  color:#777;
+  font-size:0.9rem;
+  margin-bottom:15px;
+}
+
+/* ROLE BADGE */
+.role{
+  display:inline-block;
+  padding:5px 12px;
+  background:var(--accent);
+  color:#fff;
+  font-size:12px;
+  border-radius:20px;
+  margin-bottom:10px;
+}
+
+/* ANIMATION */
+.show{
+  opacity:1 !important;
+  transform:translateY(0) !important;
+}
+
+/* FOOTER */
+footer{
+  background:var(--primary);
+  color:#fff;
+  text-align:center;
+  padding:30px;
+  margin-top:50px;
+}
+
+/* MOBILE */
+@media(max-width:768px){
+  .hero h1{font-size:2rem;}
+}
+</style>
+</head>
+
+<body>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-content">
+    <h1 id="typing"></h1>
+    <p>Meet the professionals powering GlobalSwift Logistics worldwide.</p>
+  </div>
+</section>
+
+<!-- EXECUTIVE TEAM -->
+<section class="section">
+  <h2>Executive Leadership</h2>
+
+  <div class="team-grid">
+
+    <div class="card">
+      <img src="https://randomuser.me/api/portraits/men/32.jpg">
+      <div class="role">CEO & Founder</div>
+      <h3>David Johnson</h3>
+      <p>Leads global strategy and innovation for logistics operations.</p>
+    </div>
+
+    <div class="card">
+      <img src="https://randomuser.me/api/portraits/women/44.jpg">
+      <div class="role">COO</div>
+      <h3>Sarah Williams</h3>
+      <p>Oversees daily operations and global supply chain performance.</p>
+    </div>
+
+    <div class="card">
+      <img src="https://randomuser.me/api/portraits/men/75.jpg">
+      <div class="role">CTO</div>
+      <h3>Michael Lee</h3>
+      <p>Drives technology, tracking systems, and logistics automation.</p>
+    </div>
+
+  </div>
+</section>
+
+<!-- STAFF TEAM -->
+<section class="section">
+  <h2>Operations Team</h2>
+
+  <div class="team-grid">
+
+    <div class="card">
+      <img src="https://randomuser.me/api/portraits/women/68.jpg">
+      <div class="role">Logistics Manager</div>
+      <h3>Emily Carter</h3>
+      <p>Coordinates shipment flow and delivery schedules.</p>
+    </div>
+
+    <div class="card">
+      <img src="https://randomuser.me/api/portraits/men/21.jpg">
+      <div class="role">Tracking Specialist</div>
+      <h3>James Brown</h3>
+      <p>Manages real-time shipment tracking and monitoring systems.</p>
+    </div>
+
+    <div class="card">
+      <img src="https://randomuser.me/api/portraits/women/12.jpg">
+      <div class="role">Customer Support</div>
+      <h3>Linda Scott</h3>
+      <p>Handles customer inquiries and service support globally.</p>
+    </div>
+
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <p>© 2026 GlobalSwift Logistics. All rights reserved.</p>
+</footer>
+
+<script>
+/* TYPING EFFECT */
+const text = "Meet Our Global Team";
+let i = 0;
+
+function type(){
+  if(i < text.length){
+    document.getElementById("typing").innerHTML += text.charAt(i);
+    i++;
+    setTimeout(type, 70);
+  }
+}
+type();
+
+/* SCROLL ANIMATION */
+const cards = document.querySelectorAll(".card");
+
+const observer = new IntersectionObserver(entries=>{
+  entries.forEach(entry=>{
+    if(entry.isIntersecting){
+      entry.target.classList.add("show");
+    }
+  });
+},{threshold:0.2});
+
+cards.forEach(card=>observer.observe(card));
+</script>
+
+</body>
+</html>

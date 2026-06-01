@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Features - GlobalSwift Connect</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+<style>
+:root{
+  --primary:#0A2540;
+  --accent:#FF6B35;
+  --bg:#f4f7fb;
+}
+
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+  font-family:'Poppins',sans-serif;
+}
+
+body{
+  background:var(--bg);
+  color:#333;
+}
+
+/* HERO */
+.hero{
+  text-align:center;
+  padding:100px 20px 60px;
+}
+
+.hero h1{
+  font-size:2.8rem;
+}
+
+.hero p{
+  margin-top:10px;
+  font-size:1.1rem;
+  color:#555;
+}
+
+/* GRID */
+.grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+  gap:25px;
+  padding:50px 8%;
+}
+
+/* CARD */
+.card{
+  background:#fff;
+  padding:30px;
+  border-radius:12px;
+  box-shadow:0 15px 35px rgba(0,0,0,0.08);
+  transition:0.3s;
+  position:relative;
+  overflow:hidden;
+}
+
+.card:hover{
+  transform:translateY(-8px);
+}
+
+/* ICON */
+.icon{
+  font-size:2rem;
+  margin-bottom:15px;
+  color:var(--accent);
+}
+
+/* TITLE */
+.card h3{
+  margin-bottom:10px;
+  color:var(--primary);
+}
+
+/* HIGHLIGHT BAR */
+.bar{
+  height:4px;
+  background:#eee;
+  margin-top:15px;
+  border-radius:10px;
+  overflow:hidden;
+}
+
+.bar span{
+  display:block;
+  height:100%;
+  background:linear-gradient(90deg,var(--accent),var(--primary));
+}
+.bar span.w90{width:90%;}
+.bar span.w85{width:85%;}
+.bar span.w80{width:80%;}
+.bar span.w88{width:88%;}
+.bar span.w75{width:75%;}
+.bar span.w70{width:70%;}
+
+/* CTA SECTION */
+.cta{
+  text-align:center;
+  padding:80px 20px;
+  background:var(--primary);
+  color:#fff;
+}
+
+.cta a{
+  display:inline-block;
+  margin-top:20px;
+  padding:12px 25px;
+  background:var(--accent);
+  color:#fff;
+  border-radius:30px;
+  text-decoration:none;
+}
+
+/* ANIMATION */
+.fade{
+  opacity:0;
+  transform:translateY(30px);
+  transition:0.6s;
+}
+
+.show{
+  opacity:1;
+  transform:translateY(0);
+}
+
+/* MOBILE */
+@media(max-width:768px){
+  .hero h1{font-size:2rem;}
+}
+</style>
+</head>
+
+<body>
+
+<!-- HERO -->
+<section class="hero">
+  <h1 id="typing"></h1>
+  <p>Everything you need to manage customer communication in one platform.</p>
+</section>
+
+<!-- FEATURES -->
+<section class="grid fade">
+
+  <div class="card">
+    <div class="icon">💬</div>
+    <h3>Live Chat</h3>
+    <p>Talk to customers instantly on your website in real time.</p>
+    <div class="bar"><span class="w90"></span></div>
+  </div>
+
+  <div class="card">
+    <div class="icon">📱</div>
+    <h3>WhatsApp Integration</h3>
+    <p>Connect directly with customers using WhatsApp Business API.</p>
+    <div class="bar"><span class="w85"></span></div>
+  </div>
+
+  <div class="card">
+    <div class="icon">🤖</div>
+    <h3>AI Chatbot</h3>
+    <p>Automate replies and support customers 24/7 without delay.</p>
+    <div class="bar"><span class="w80"></span></div>
+  </div>
+
+  <div class="card">
+    <div class="icon">👨‍💼</div>
+    <h3>Agent Dashboard</h3>
+    <p>Manage all conversations from one powerful control panel.</p>
+    <div class="bar"><span class="w88"></span></div>
+  </div>
+
+  <div class="card">
+    <div class="icon">📊</div>
+    <h3>Analytics</h3>
+    <p>Track performance, response time, and customer engagement.</p>
+    <div class="bar"><span class="w75"></span></div>
+  </div>
+
+  <div class="card">
+    <div class="icon">🔔</div>
+    <h3>Smart Notifications</h3>
+    <p>Get instant alerts for new messages and support requests.</p>
+    <div class="bar"><span class="w70"></span></div>
+  </div>
+
+</section>
+
+<!-- CTA -->
+<section class="cta">
+  <h2>Ready to upgrade your customer support?</h2>
+  <a href="cta.html">Start Free Trial</a>
+</section>
+
+<script>
+
+/* TYPING */
+const text="Powerful Features Built for Modern Businesses";
+let i=0;
+
+function type(){
+  if(i<text.length){
+    document.getElementById("typing").innerHTML+=text.charAt(i);
+    i++;
+    setTimeout(type,60);
+  }
+}
+type();
+
+/* SCROLL ANIMATION */
+const fade=document.querySelectorAll(".fade");
+
+const observer=new IntersectionObserver(entries=>{
+  entries.forEach(e=>{
+    if(e.isIntersecting){
+      e.target.classList.add("show");
+    }
+  });
+},{threshold:0.2});
+
+fade.forEach(f=>observer.observe(f));
+
+</script>
+
+</body>
+</html>

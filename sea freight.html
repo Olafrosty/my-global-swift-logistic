@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sea Freight - GlobalSwift Logistics</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+<style>
+:root{
+  --primary:#0A2540;
+  --accent:#FF6B35;
+  --bg:#f4f7fb;
+}
+
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+  font-family:'Poppins',sans-serif;
+}
+
+body{
+  background:var(--bg);
+  color:#333;
+  overflow-x:hidden;
+}
+
+/* HERO */
+.hero{
+  height:70vh;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  text-align:center;
+  color:#fff;
+  background:url("https://images.unsplash.com/photo-1500375592092-40eb2168fd21?auto=format&fit=crop&w=1600&q=80") center/cover no-repeat;
+  position:relative;
+}
+
+.hero::before{
+  content:"";
+  position:absolute;
+  inset:0;
+  background:linear-gradient(135deg,rgba(10,37,64,0.85),rgba(0,0,0,0.6));
+}
+
+.hero-content{
+  position:relative;
+  z-index:1;
+}
+
+.hero h1{
+  font-size:3rem;
+}
+
+/* SECTION */
+.section{
+  padding:80px 8%;
+}
+
+.section h2{
+  text-align:center;
+  margin-bottom:40px;
+  color:var(--primary);
+}
+
+/* GRID */
+.grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+  gap:20px;
+}
+
+/* CARD */
+.card{
+  background:#fff;
+  padding:20px;
+  border-radius:12px;
+  box-shadow:0 10px 30px rgba(0,0,0,0.08);
+  transition:0.3s;
+  transform:translateY(40px);
+  opacity:0;
+}
+
+.card:hover{
+  transform:translateY(-8px);
+}
+
+.card h3{
+  margin-bottom:10px;
+}
+
+/* SEA ROUTE VISUAL */
+.route{
+  background:#fff;
+  padding:30px;
+  border-radius:12px;
+  text-align:center;
+  box-shadow:0 10px 30px rgba(0,0,0,0.08);
+}
+
+.wave-line{
+  height:6px;
+  background:linear-gradient(90deg,#0A2540,#00aaff,#0A2540);
+  width:80%;
+  margin:30px auto;
+  border-radius:10px;
+  position:relative;
+  overflow:hidden;
+}
+
+.ship{
+  position:absolute;
+  top:-22px;
+  left:0;
+  font-size:26px;
+  animation:sail 6s infinite linear;
+}
+
+@keyframes sail{
+  0%{left:0}
+  100%{left:95%}
+}
+
+/* STATUS */
+.status{
+  background:#fff;
+  padding:25px;
+  border-radius:12px;
+  box-shadow:0 10px 30px rgba(0,0,0,0.08);
+}
+
+.step{
+  padding:12px;
+  margin:10px 0;
+  border-left:4px solid var(--accent);
+  transition:0.3s;
+}
+
+.step:hover{
+  transform:translateX(6px);
+}
+
+/* PRICING */
+.pricing{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+  gap:20px;
+}
+
+.plan{
+  background:#fff;
+  padding:25px;
+  border-radius:12px;
+  text-align:center;
+  box-shadow:0 10px 30px rgba(0,0,0,0.08);
+  transition:0.3s;
+}
+
+.plan:hover{
+  transform:scale(1.05);
+}
+
+.price{
+  font-size:2rem;
+  color:var(--accent);
+  margin:10px 0;
+}
+
+.btn{
+  display:inline-block;
+  margin-top:10px;
+  padding:10px 15px;
+  background:var(--primary);
+  color:#fff;
+  border-radius:20px;
+  text-decoration:none;
+}
+
+/* ANIMATION */
+.show{
+  opacity:1 !important;
+  transform:translateY(0) !important;
+}
+
+/* FOOTER */
+footer{
+  background:var(--primary);
+  color:#fff;
+  text-align:center;
+  padding:30px;
+  margin-top:50px;
+}
+
+/* MOBILE */
+@media(max-width:768px){
+  .hero h1{font-size:2rem;}
+}
+</style>
+</head>
+
+<body>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-content">
+    <h1 id="typing"></h1>
+    <p>Reliable global sea freight and container shipping solutions.</p>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section class="section">
+  <h2>Sea Freight Services</h2>
+
+  <div class="grid">
+
+    <div class="card">
+      <h3>🚢 Full Container Load (FCL)</h3>
+      <p>Exclusive container shipping for large cargo shipments.</p>
+    </div>
+
+    <div class="card">
+      <h3>📦 Less than Container Load (LCL)</h3>
+      <p>Cost-effective shared container shipping solution.</p>
+    </div>
+
+    <div class="card">
+      <h3>⚓ Bulk Cargo Shipping</h3>
+      <p>Heavy industrial and raw material maritime transport.</p>
+    </div>
+
+  </div>
+</section>
+
+<!-- ROUTE -->
+<section class="section">
+  <h2>Global Sea Routes</h2>
+
+  <div class="route">
+    <p>Tracking Major Shipping Lane</p>
+
+    <div class="wave-line">
+      <div class="ship">🚢</div>
+    </div>
+
+    <p>📍 China → Nigeria → UK → USA</p>
+  </div>
+</section>
+
+<!-- STATUS -->
+<section class="section">
+  <h2>Container Tracking Status</h2>
+
+  <div class="status">
+
+    <div class="step">✔ Container Loaded at Port</div>
+    <div class="step">✔ Vessel Departed Port</div>
+    <div class="step">🚢 In Transit (Ocean Route)</div>
+    <div class="step">⏳ Approaching Destination Port</div>
+
+  </div>
+</section>
+
+<!-- PRICING -->
+<section class="section">
+  <h2>Sea Freight Pricing</h2>
+
+  <div class="pricing">
+
+    <div class="plan">
+      <h3>Basic</h3>
+      <div class="price">$200</div>
+      <p>LCL Shipping</p>
+      <a href="#" class="btn">Choose</a>
+    </div>
+
+    <div class="plan">
+      <h3>Standard</h3>
+      <div class="price">$500</div>
+      <p>FCL Container</p>
+      <a href="#" class="btn">Choose</a>
+    </div>
+
+    <div class="plan">
+      <h3>Enterprise</h3>
+      <div class="price">$1200</div>
+      <p>Bulk Cargo + Priority Handling</p>
+      <a href="#" class="btn">Choose</a>
+    </div>
+
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <p>© 2026 GlobalSwift Sea Freight Division</p>
+</footer>
+
+<script>
+
+/* TYPING */
+const text="Global Sea Freight Logistics";
+let i=0;
+
+function type(){
+  if(i<text.length){
+    document.getElementById("typing").innerHTML+=text.charAt(i);
+    i++;
+    setTimeout(type,70);
+  }
+}
+type();
+
+/* SCROLL ANIMATION */
+const items=document.querySelectorAll(".card");
+
+const observer=new IntersectionObserver(entries=>{
+  entries.forEach(e=>{
+    if(e.isIntersecting){
+      e.target.classList.add("show");
+    }
+  });
+},{threshold:0.2});
+
+items.forEach(i=>observer.observe(i));
+
+</script>
+
+</body>
+</html>

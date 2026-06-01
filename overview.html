@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Overview - GlobalSwift Logistics</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+<style>
+:root{
+  --primary:#0A2540;
+  --accent:#FF6B35;
+  --light:#f4f7fb;
+}
+
+/* RESET */
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+  font-family:'Poppins',sans-serif;
+}
+
+body{
+  background:var(--light);
+  color:#333;
+}
+
+/* HERO */
+.hero{
+  height:100vh;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  text-align:center;
+  color:#fff;
+  padding:0 20px;
+  background:url("https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?auto=format&fit=crop&w=1600&q=80") center/cover no-repeat;
+  position:relative;
+}
+
+.hero::before{
+  content:"";
+  position:absolute;
+  inset:0;
+  background:linear-gradient(135deg,rgba(10,37,64,0.85),rgba(0,0,0,0.6));
+}
+
+.hero-content{
+  position:relative;
+  z-index:1;
+  max-width:700px;
+}
+
+.hero h1{
+  font-size:3rem;
+  margin-bottom:15px;
+}
+
+.hero p{
+  font-size:1.2rem;
+  margin-bottom:25px;
+}
+
+/* BUTTON */
+.btn{
+  padding:12px 28px;
+  background:var(--accent);
+  color:#fff;
+  border-radius:30px;
+  text-decoration:none;
+  font-weight:600;
+  transition:0.4s;
+  position:relative;
+  overflow:hidden;
+}
+
+.btn:hover{
+  transform:translateY(-4px);
+  box-shadow:0 10px 25px rgba(255,107,53,0.4);
+}
+
+.btn::after{
+  content:"";
+  position:absolute;
+  left:-100%;
+  top:0;
+  width:100%;
+  height:100%;
+  background:rgba(255,255,255,0.3);
+  transition:0.4s;
+}
+
+.btn:hover::after{
+  left:100%;
+}
+
+/* SECTION */
+.section{
+  padding:80px 8%;
+}
+
+.section h2{
+  text-align:center;
+  margin-bottom:40px;
+  color:var(--primary);
+}
+
+/* ABOUT GRID */
+.grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(300px,1fr));
+  gap:30px;
+  align-items:center;
+}
+
+.grid img{
+  width:100%;
+  border-radius:12px;
+}
+
+/* CARDS */
+.cards{
+  display:flex;
+  gap:25px;
+  flex-wrap:wrap;
+  justify-content:center;
+}
+
+.card{
+  background:#fff;
+  width:280px;
+  border-radius:15px;
+  overflow:hidden;
+  box-shadow:0 10px 30px rgba(0,0,0,0.08);
+  transform:translateY(40px);
+  opacity:0;
+  transition:0.6s;
+}
+
+.card img{
+  width:100%;
+  height:180px;
+  object-fit:cover;
+}
+
+.card h3{
+  margin:15px;
+}
+
+.card p{
+  padding:0 15px 20px;
+  font-size:0.95rem;
+}
+
+/* HOVER */
+.card:hover{
+  transform:translateY(-10px) scale(1.02);
+  box-shadow:0 20px 50px rgba(0,0,0,0.15);
+}
+
+/* SHOW ANIMATION */
+.show{
+  opacity:1 !important;
+  transform:translateY(0) !important;
+}
+
+/* CTA */
+.cta{
+  text-align:center;
+  padding:80px 20px;
+  background:var(--primary);
+  color:#fff;
+}
+
+/* FOOTER */
+footer{
+  background:#081b2f;
+  color:#fff;
+  padding:40px;
+  text-align:center;
+}
+
+/* RESPONSIVE */
+@media(max-width:768px){
+  .hero h1{font-size:2rem;}
+}
+</style>
+</head>
+
+<body>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-content">
+    <h1 id="typing"></h1>
+    <p>GlobalSwift Logistics delivers fast, secure, and scalable logistics solutions worldwide.</p>
+    <a href="contact.html" class="btn">Get Started</a>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section class="section">
+  <h2>Who We Are</h2>
+  <div class="grid">
+    <img src="https://images.unsplash.com/photo-1601597111158-2fceff292cdc?auto=format&fit=crop&w=1000&q=80">
+    <p>
+      GlobalSwift Logistics is a modern logistics company focused on delivering efficient and reliable supply chain solutions.
+      From local delivery to global freight, we combine technology with expertise to move your business forward.
+    </p>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section class="section">
+  <h2>Our Core Services</h2>
+
+  <div class="cards">
+    <div class="card">
+      <img src="https://images.unsplash.com/photo-1581091870627-3c8e7c94a4e6?auto=format&fit=crop&w=800&q=80">
+      <h3>Local Delivery</h3>
+      <p>Fast and reliable delivery across cities with real-time tracking.</p>
+    </div>
+
+    <div class="card">
+      <img src="https://images.unsplash.com/photo-1578574577315-3fbeb0cecdc2?auto=format&fit=crop&w=800&q=80">
+      <h3>International Shipping</h3>
+      <p>Global freight services via air, sea, and land.</p>
+    </div>
+
+    <div class="card">
+      <img src="https://images.unsplash.com/photo-1590496793929-36417d3117de?auto=format&fit=crop&w=800&q=80">
+      <h3>Warehousing</h3>
+      <p>Secure and smart storage solutions for businesses.</p>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta">
+  <h2>Ready to Move Your Business Forward?</h2>
+  <p>Partner with GlobalSwift Logistics today.</p>
+  <br>
+  <a href="contact.html" class="btn">Contact Us</a>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <p>© 2026 GlobalSwift Logistics. All rights reserved.</p>
+</footer>
+
+<script>
+/* TYPING EFFECT */
+const text = "Delivering Speed. Connecting the World.";
+let i = 0;
+function type(){
+  if(i < text.length){
+    document.getElementById("typing").innerHTML += text.charAt(i);
+    i++;
+    setTimeout(type, 70);
+  }
+}
+type();
+
+/* SCROLL ANIMATION */
+const cards = document.querySelectorAll(".card");
+
+const observer = new IntersectionObserver(entries=>{
+  entries.forEach(entry=>{
+    if(entry.isIntersecting){
+      entry.target.classList.add("show");
+    }
+  });
+},{threshold:0.2});
+
+cards.forEach(card=>{
+  observer.observe(card);
+});
+</script>
+
+</body>
+</html>

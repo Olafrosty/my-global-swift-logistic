@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Road Transport - GlobalSwift Logistics</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+<style>
+:root{
+  --primary:#0A2540;
+  --accent:#FF6B35;
+  --bg:#f4f7fb;
+}
+
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+  font-family:'Poppins',sans-serif;
+}
+
+body{
+  background:var(--bg);
+  color:#333;
+  overflow-x:hidden;
+}
+
+/* HERO */
+.hero{
+  height:70vh;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  text-align:center;
+  color:#fff;
+  background:url("https://images.unsplash.com/photo-1601584115197-04ecc0da31d7?auto=format&fit=crop&w=1600&q=80") center/cover no-repeat;
+  position:relative;
+}
+
+.hero::before{
+  content:"";
+  position:absolute;
+  inset:0;
+  background:linear-gradient(135deg,rgba(10,37,64,0.85),rgba(0,0,0,0.6));
+}
+
+.hero-content{
+  position:relative;
+  z-index:1;
+}
+
+.hero h1{
+  font-size:3rem;
+}
+
+/* SECTION */
+.section{
+  padding:80px 8%;
+}
+
+.section h2{
+  text-align:center;
+  margin-bottom:40px;
+  color:var(--primary);
+}
+
+/* CARDS */
+.grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+  gap:20px;
+}
+
+.card{
+  background:#fff;
+  padding:20px;
+  border-radius:12px;
+  box-shadow:0 10px 30px rgba(0,0,0,0.08);
+  transition:0.3s;
+}
+
+.card:hover{
+  transform:translateY(-8px);
+}
+
+.card h3{
+  margin-bottom:10px;
+}
+
+/* ROUTE MAP (visual UI) */
+.route{
+  background:#fff;
+  padding:40px;
+  border-radius:12px;
+  text-align:center;
+  position:relative;
+}
+
+.line{
+  height:4px;
+  background:var(--accent);
+  margin:30px auto;
+  width:80%;
+  position:relative;
+  border-radius:10px;
+}
+
+.dot{
+  width:14px;
+  height:14px;
+  background:var(--primary);
+  border-radius:50%;
+  position:absolute;
+  top:-5px;
+}
+
+.dot.start{left:0;}
+.dot.middle{left:50%;}
+.dot.end{right:0;}
+
+/* TIMELINE */
+.timeline{
+  display:flex;
+  flex-direction:column;
+  gap:20px;
+}
+
+.step{
+  background:#fff;
+  padding:15px;
+  border-left:4px solid var(--accent);
+  border-radius:8px;
+  transition:0.3s;
+}
+
+.step:hover{
+  transform:translateX(5px);
+}
+
+/* PRICING */
+.pricing{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+  gap:20px;
+}
+
+.plan{
+  background:#fff;
+  padding:25px;
+  border-radius:12px;
+  text-align:center;
+  box-shadow:0 10px 30px rgba(0,0,0,0.08);
+  transition:0.3s;
+}
+
+.plan:hover{
+  transform:scale(1.05);
+}
+
+.plan h3{
+  margin-bottom:10px;
+  color:var(--primary);
+}
+
+.price{
+  font-size:2rem;
+  color:var(--accent);
+  margin:10px 0;
+}
+
+.btn{
+  display:inline-block;
+  margin-top:10px;
+  padding:10px 15px;
+  background:var(--accent);
+  color:#fff;
+  border-radius:20px;
+  text-decoration:none;
+}
+
+/* ANIMATION */
+.fade{
+  opacity:0;
+  transform:translateY(40px);
+  transition:0.6s;
+}
+
+.show{
+  opacity:1 !important;
+  transform:translateY(0) !important;
+}
+
+/* FOOTER */
+footer{
+  background:var(--primary);
+  color:#fff;
+  text-align:center;
+  padding:30px;
+  margin-top:50px;
+}
+
+/* MOBILE */
+@media(max-width:768px){
+  .hero h1{font-size:2rem;}
+}
+</style>
+</head>
+
+<body>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-content">
+    <h1 id="typing"></h1>
+    <p>Fast, secure, and reliable road transport across regions.</p>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section class="section">
+  <h2>Road Transport Services</h2>
+
+  <div class="grid">
+    <div class="card fade">
+      <h3>🚛 Cargo Transport</h3>
+      <p>Heavy-duty trucks for bulk goods and industrial cargo.</p>
+    </div>
+
+    <div class="card fade">
+      <h3>📦 Parcel Delivery</h3>
+      <p>Fast door-to-door delivery for small and medium packages.</p>
+    </div>
+
+    <div class="card fade">
+      <h3>🛣️ Inter-State Logistics</h3>
+      <p>Reliable transportation across cities and regions.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ROUTE -->
+<section class="section">
+  <h2>Live Route Overview</h2>
+
+  <div class="route fade">
+    <p>Tracking from Origin to Destination</p>
+    <div class="line">
+      <div class="dot start"></div>
+      <div class="dot middle"></div>
+      <div class="dot end"></div>
+    </div>
+    <p>📍 Lagos → Abuja → Kano</p>
+  </div>
+</section>
+
+<!-- TIMELINE -->
+<section class="section">
+  <h2>Delivery Process</h2>
+
+  <div class="timeline">
+    <div class="step fade">1. Package Pickup from Warehouse</div>
+    <div class="step fade">2. Sorting & Vehicle Assignment</div>
+    <div class="step fade">3. In-Transit Monitoring</div>
+    <div class="step fade">4. Final Delivery to Customer</div>
+  </div>
+</section>
+
+<!-- PRICING -->
+<section class="section">
+  <h2>Transport Pricing</h2>
+
+  <div class="pricing">
+    <div class="plan fade">
+      <h3>Basic</h3>
+      <div class="price">$20</div>
+      <p>Small package delivery</p>
+      <a href="#" class="btn">Choose</a>
+    </div>
+
+    <div class="plan fade">
+      <h3>Standard</h3>
+      <div class="price">$50</div>
+      <p>Medium cargo transport</p>
+      <a href="#" class="btn">Choose</a>
+    </div>
+
+    <div class="plan fade">
+      <h3>Premium</h3>
+      <div class="price">$120</div>
+      <p>Full truck load service</p>
+      <a href="#" class="btn">Choose</a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <p>© 2026 GlobalSwift Logistics - Road Transport Division</p>
+</footer>
+
+<script>
+
+/* TYPING */
+const text="Road Transport Solutions";
+let i=0;
+function type(){
+  if(i<text.length){
+    document.getElementById("typing").innerHTML+=text.charAt(i);
+    i++;
+    setTimeout(type,70);
+  }
+}
+type();
+
+/* SCROLL ANIMATION */
+const items=document.querySelectorAll(".fade");
+
+const observer=new IntersectionObserver(entries=>{
+  entries.forEach(e=>{
+    if(e.isIntersecting){
+      e.target.classList.add("show");
+    }
+  });
+},{threshold:0.2});
+
+items.forEach(i=>observer.observe(i));
+
+</script>
+
+</body>
+</html>

@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CTA - GlobalSwift SaaS</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+<style>
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+  font-family:'Poppins',sans-serif;
+}
+
+/* ================= CTA SECTION ================= */
+.cta-section{
+  min-height: 100vh;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  text-align:center;
+  padding: 80px 20px;
+  background: linear-gradient(135deg, #0A2540, #122c4d);
+  color:#fff;
+  position:relative;
+  overflow:hidden;
+}
+
+/* glow effect */
+.cta-section::before{
+  content:"";
+  position:absolute;
+  width:500px;
+  height:500px;
+  background:rgba(255,107,53,0.25);
+  filter:blur(120px);
+  top:-150px;
+  left:-150px;
+}
+
+/* container */
+.cta-container{
+  max-width:750px;
+  z-index:2;
+}
+
+/* heading */
+.cta-container h1{
+  font-size:2.6rem;
+  margin-bottom:15px;
+  animation: fadeUp 0.8s ease;
+}
+
+/* text */
+.cta-container p{
+  font-size:1.1rem;
+  opacity:0.85;
+  margin-bottom:30px;
+}
+
+/* buttons */
+.cta-buttons{
+  display:flex;
+  justify-content:center;
+  gap:15px;
+  flex-wrap:wrap;
+}
+
+/* primary button */
+.btn-primary{
+  background:#FF6B35;
+  color:#fff;
+  padding:14px 26px;
+  border:none;
+  border-radius:30px;
+  font-weight:600;
+  cursor:pointer;
+  transition:0.3s;
+  box-shadow:0 10px 25px rgba(255,107,53,0.3);
+}
+
+.btn-primary:hover{
+  transform:translateY(-3px);
+  box-shadow:0 15px 40px rgba(255,107,53,0.4);
+}
+
+/* secondary button */
+.btn-secondary{
+  border:2px solid #fff;
+  background:transparent;
+  color:#fff;
+  padding:14px 26px;
+  border-radius:30px;
+  font-weight:600;
+  cursor:pointer;
+  transition:0.3s;
+}
+
+.btn-secondary:hover{
+  background:#fff;
+  color:#0A2540;
+}
+
+/* note */
+.cta-container small{
+  display:block;
+  margin-top:20px;
+  opacity:0.7;
+}
+
+/* ================= MODAL ================= */
+.modal{
+  position:fixed;
+  top:0;
+  left:0;
+  width:100%;
+  height:100%;
+  background:rgba(0,0,0,0.6);
+  display:none;
+  align-items:center;
+  justify-content:center;
+  z-index:999;
+}
+
+/* modal box */
+.modal-content{
+  background:#fff;
+  width:380px;
+  padding:30px;
+  border-radius:15px;
+  position:relative;
+  animation: pop 0.3s ease;
+}
+
+/* close */
+.close{
+  position:absolute;
+  right:15px;
+  top:10px;
+  font-size:22px;
+  cursor:pointer;
+}
+
+/* form */
+.modal-content form{
+  display:flex;
+  flex-direction:column;
+  gap:12px;
+  margin-top:15px;
+}
+
+.modal-content input{
+  padding:12px;
+  border:1px solid #ddd;
+  border-radius:8px;
+  outline:none;
+}
+
+.modal-content input:focus{
+  border-color:#FF6B35;
+  box-shadow:0 0 8px rgba(255,107,53,0.2);
+}
+
+.modal-content button{
+  padding:12px;
+  background:#FF6B35;
+  color:#fff;
+  border:none;
+  border-radius:8px;
+  cursor:pointer;
+  font-weight:600;
+}
+
+/* animation */
+@keyframes fadeUp{
+  from{opacity:0; transform:translateY(20px);}
+  to{opacity:1; transform:translateY(0);}
+}
+
+@keyframes pop{
+  from{transform:scale(0.8); opacity:0;}
+  to{transform:scale(1); opacity:1;}
+}
+
+/* MOBILE */
+@media(max-width:768px){
+  .cta-container h1{
+    font-size:1.8rem;
+  }
+  .modal-content{
+    width:90%;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<!-- CTA SECTION -->
+<section class="cta-section">
+
+  <div class="cta-container">
+
+    <h1>Upgrade Your Logistics Experience</h1>
+
+    <p>
+      Join GlobalSwift SaaS platform to manage shipments, analytics,
+      real-time tracking, and customer communication in one system.
+    </p>
+
+    <div class="cta-buttons">
+      <button class="btn-primary" onclick="openModal()">Start Free Trial</button>
+      <button class="btn-secondary">Book Demo</button>
+    </div>
+
+    <small>No credit card required • Cancel anytime</small>
+
+  </div>
+
+</section>
+
+<!-- MODAL -->
+<div class="modal" id="modal">
+
+  <div class="modal-content">
+
+    <span class="close" onclick="closeModal()">&times;</span>
+
+    <h2>Create Account</h2>
+    <p>Start your free SaaS access</p>
+
+    <form onsubmit="signup(event)">
+
+      <input type="text" placeholder="Full Name" required>
+      <input type="email" placeholder="Email Address" required>
+      <input type="password" placeholder="Password" required>
+
+      <button type="submit">Sign Up</button>
+
+    </form>
+
+  </div>
+
+</div>
+
+<script>
+
+function openModal(){
+  document.getElementById("modal").style.display = "flex";
+}
+
+function closeModal(){
+  document.getElementById("modal").style.display = "none";
+}
+
+function signup(e){
+  e.preventDefault();
+
+  const btn = e.target.querySelector("button");
+  btn.innerText = "Creating account...";
+
+  setTimeout(()=>{
+    alert("Account created successfully 🚀");
+    closeModal();
+    btn.innerText = "Sign Up";
+  },1500);
+}
+
+window.onclick = function(e){
+  const modal = document.getElementById("modal");
+  if(e.target === modal){
+    modal.style.display = "none";
+  }
+}
+
+</script>
+
+</body>
+</html>

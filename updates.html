@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GlobalSwift SaaS Dashboard</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<style>
+:root{
+  --primary:#0A2540;
+  --accent:#FF6B35;
+  --bg:#f4f7fb;
+  --card:#fff;
+  --text:#333;
+}
+
+/* DARK MODE */
+.dark{
+  --bg:#0f172a;
+  --card:#1e293b;
+  --text:#fff;
+}
+
+body{
+  margin:0;
+  font-family:Poppins;
+  background:var(--bg);
+  color:var(--text);
+  display:flex;
+}
+
+/* SIDEBAR */
+.sidebar{
+  width:230px;
+  background:var(--primary);
+  color:#fff;
+  height:100vh;
+  padding:20px;
+}
+
+.sidebar h2{margin-bottom:20px;}
+
+.sidebar a{
+  display:block;
+  color:#fff;
+  margin:12px 0;
+  text-decoration:none;
+}
+
+/* MAIN */
+.main{
+  flex:1;
+  padding:20px;
+}
+
+/* TOPBAR */
+.topbar{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  margin-bottom:20px;
+}
+
+/* BUTTON */
+button{
+  padding:8px 12px;
+  border:none;
+  background:var(--accent);
+  color:#fff;
+  border-radius:6px;
+  cursor:pointer;
+}
+
+/* CARDS */
+.cards{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
+  gap:15px;
+}
+
+.card{
+  background:var(--card);
+  padding:15px;
+  border-radius:10px;
+}
+
+/* CHART */
+.chart-box{
+  background:var(--card);
+  margin-top:20px;
+  padding:20px;
+  border-radius:10px;
+}
+
+/* MAP */
+.map{
+  margin-top:20px;
+  background:url('https://maps.googleapis.com/maps/api/staticmap?center=Lagos&zoom=5&size=600x300') center/cover;
+  height:300px;
+  border-radius:10px;
+}
+
+/* TOAST */
+.toast{
+  position:fixed;
+  bottom:20px;
+  right:20px;
+  background:#28a745;
+  color:#fff;
+  padding:10px 20px;
+  border-radius:6px;
+  opacity:0;
+  transition:0.3s;
+}
+
+.toast.show{
+  opacity:1;
+}
+
+/* LOGIN */
+.login{
+  position:fixed;
+  inset:0;
+  background:#0008;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+
+.login-box{
+  background:#fff;
+  padding:20px;
+  border-radius:10px;
+  width:300px;
+}
+
+.login input{
+  width:100%;
+  padding:10px;
+  margin:10px 0;
+}
+
+/* MOBILE */
+@media(max-width:768px){
+  .sidebar{display:none;}
+}
+</style>
+</head>
+
+<body>
+    
+
+<!-- LOGIN -->
+<div class="login" id="login">
+  <div class="login-box">
+    <h3>Login</h3>
+    <input id="user" placeholder="Username">
+    <input id="pass" type="password" placeholder="Password">
+    <button onclick="login()">Login</button>
+  </div>
+</div>
+
+<!-- SIDEBAR -->
+<div class="sidebar">
+  <h2>GlobalSwift</h2>
+  <a href="dashboard.html">Dashboard</a>
+  <a href="shipments.html">Shipments</a>
+  <a href="Analytics.html">Analytics</a>
+</div>
+
+<!-- MAIN -->
+<div class="main">
+
+  <div class="topbar">
+    <h2>Dashboard</h2>
+    <div>
+      <button onclick="toggleDark()">🌙</button>
+    </div>
+  </div>
+
+  <!-- STATS -->
+  <div class="cards">
+    <div class="card"><h4>Total</h4><p>1200</p></div>
+    <div class="card"><h4>Transit</h4><p>320</p></div>
+    <div class="card"><h4>Delivered</h4><p>800</p></div>
+  </div>
+
+  <!-- CHART -->
+  <div class="chart-box">
+    <canvas id="chart"></canvas>
+  </div>
+
+  <!-- MAP -->
+  <div class="map"></div>
+
+</div>
+
+<div class="toast" id="toast">Updated successfully</div>
+
+<script>
+
+/* LOGIN SYSTEM */
+function login(){
+  let u = document.getElementById("user").value;
+  let p = document.getElementById("pass").value;
+
+  if(u==="admin" && p==="1234"){
+    document.getElementById("login").style.display="none";
+  }else{
+    alert("Invalid login");
+  }
+}
+
+/* DARK MODE */
+function toggleDark(){
+  document.body.classList.toggle("dark");
+}
+
+/* TOAST */
+function showToast(){
+  let t = document.getElementById("toast");
+  t.classList.add("show");
+  setTimeout(()=>t.classList.remove("show"),2000);
+}
+
+/* CHART */
+new Chart(document.getElementById("chart"),{
+  type:"bar",
+  data:{
+    labels:["Pending","Transit","Delivered"],
+    datasets:[{
+      label:"Shipments",
+      data:[200,320,800]
+    }]
+  }
+});
+
+/* SIMULATE UPDATE */
+setTimeout(showToast,2000);
+
+</script>
+
+</body>
+</html>

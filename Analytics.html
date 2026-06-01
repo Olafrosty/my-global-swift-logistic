@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Analytics - GlobalSwift</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<style>
+:root{
+  --primary:#0A2540;
+  --accent:#FF6B35;
+  --bg:#f4f7fb;
+  --card:#fff;
+}
+
+*{margin:0;padding:0;box-sizing:border-box;font-family:Poppins;}
+
+body{
+  background:var(--bg);
+  padding:20px;
+}
+
+/* HEADER */
+.header{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  margin-bottom:20px;
+}
+
+select{
+  padding:8px;
+  border-radius:6px;
+}
+
+/* GRID */
+.grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(300px,1fr));
+  gap:20px;
+}
+
+/* CARD */
+.card{
+  background:var(--card);
+  padding:20px;
+  border-radius:12px;
+  box-shadow:0 10px 25px rgba(0,0,0,0.08);
+}
+
+/* STATS */
+.stats{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(150px,1fr));
+  gap:15px;
+  margin-bottom:20px;
+}
+
+.stat{
+  background:#fff;
+  padding:15px;
+  border-radius:10px;
+}
+
+.stat h4{color:#777;font-size:13px;}
+.stat p{font-size:20px;font-weight:600;}
+
+canvas{
+  width:100% !important;
+}
+
+/* MOBILE */
+@media(max-width:768px){
+  .grid{grid-template-columns:1fr;}
+}
+</style>
+</head>
+
+<body>
+
+<div class="header">
+  <h2>Analytics Dashboard</h2>
+
+  <select id="filter">
+    <option value="all">All Time</option>
+    <option value="week">Last 7 Days</option>
+    <option value="month">Last 30 Days</option>
+  </select>
+</div>
+
+<!-- STATS -->
+<div class="stats">
+  <div class="stat"><h4>Total Shipments</h4><p id="total">0</p></div>
+  <div class="stat"><h4>Delivered</h4><p id="delivered">0</p></div>
+  <div class="stat"><h4>In Transit</h4><p id="transit">0</p></div>
+  <div class="stat"><h4>Revenue</h4><p id="revenue">$0</p></div>
+</div>
+
+<!-- CHARTS -->
+<div class="grid">
+
+  <div class="card">
+    <h3>Shipment Status</h3>
+    <canvas id="statusChart"></canvas>
+  </div>
+
+  <div class="card">
+    <h3>Shipments Over Time</h3>
+    <canvas id="trendChart"></canvas>
+  </div>
+
+  <div class="card">
+    <h3>Revenue Trend</h3>
+    <canvas id="revenueChart"></canvas>
+  </div>
+
+</div>
+
+<script>
+let shipments=[];
+
+/* LOAD DATA FROM BACKEND */
+async function load(){
+  let res = await fetch("/api/shipments");
+  shipments = await res.json();
+  updateAnalytics();
+}
+
+function updateAnalytics(){
+  let total = shipments.length;
+  let delivered = shipments.filter(s=>s.status==="delivered").length;
+  let transit = shipments.filter(s=>s.status==="transit").length;
+
+  let revenue = total * 50; // simple logic
+
+  document.getElementById("total").innerText = total;
+  document.getElementById("delivered").innerText = delivered;
+  document.getElementById("transit").innerText = transit;
+  document.getElementById("revenue").innerText = "$"+revenue;
+
+  renderCharts(delivered, transit, total, revenue);
+}
+
+/* CHARTS */
+function renderCharts(delivered, transit, total, revenue){
+
+  new Chart(document.getElementById("statusChart"),{
+    type:"pie",
+    data:{
+      labels:["Delivered","Transit","Pending"],
+      datasets:[{
+        data:[delivered, transit, total - delivered - transit]
+      }]
+    }
+  });
+
+  new Chart(document.getElementById("trendChart"),{
+    type:"line",
+    data:{
+      labels:["Mon","Tue","Wed","Thu","Fri","Sat","Sun"],
+      datasets:[{
+        label:"Shipments",
+        data:[12,19,8,15,10,20,25]
+      }]
+    }
+  });
+
+  new Chart(document.getElementById("revenueChart"),{
+    type:"bar",
+    data:{
+      labels:["Week 1","Week 2","Week 3","Week 4"],
+      datasets:[{
+        label:"Revenue",
+        data:[200,400,300,600]
+      }]
+    }
+  });
+}
+
+/* FILTER (basic demo) */
+document.getElementById("filter").addEventListener("change",()=>{
+  // You can refine by date later
+  updateAnalytics();
+});
+
+load();
+</script>
+
+</body>
+</html>
