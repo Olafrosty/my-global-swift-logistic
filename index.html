@@ -40,6 +40,8 @@ nav{background:var(--navy);position:sticky;top:0;z-index:1000;box-shadow:0 2px 1
 .nav-links{display:flex;align-items:center;gap:28px;list-style:none}
 .nav-links > li > a{color:var(--white);font-weight:500;padding:10px 0;display:flex;align-items:center;gap:6px;transition:var(--trans)}
 .nav-links > li > a:hover{color:var(--orange)}
+.logo{display:flex;align-items:center;justify-content:center;padding:10px 20px}
+.logo img{width:100px;max-width:100px;height:70px;transition:all 0.3s ease;cursor:pointer;filter:drop-shadow(0 6px 12px rgba(0,0,0,0.15));}
 
 
 li.drop-down{position:relative}
@@ -242,7 +244,7 @@ footer{background:var(--navy);color:var(--white);padding:70px 0 25px}
 <nav>
   <div class="nav-wrap container">
     <div class="logo">
-      <img src="/logo.png" alt="GlobalSwift Logo" style="width:100px;max-width:100px;height:70px;transition:all 0.3s ease;cursor:pointer;filter:drop-shadow(0 6px 12px rgba(0,0,0,0.15));">
+      <img src="/logo.png" alt="GlobalSwift Logo">
     </div>
 
     <button class="menu-toggle" id="menuOpen"><i class="fa-solid fa-bars"></i></button>
