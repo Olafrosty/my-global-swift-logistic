@@ -36,12 +36,11 @@ section{padding:80px 0}
 /* NAVBAR */
 nav{background:var(--navy);position:sticky;top:0;z-index:1000;box-shadow:0 2px 12px rgba(0,0,0,0.1)}
 .nav-wrap{display:flex;justify-content:space-between;align-items:center;padding:18px 20px}
-
+.logo{display:flex;align-items:center;justify-content:center;padding:10px 20px}
+.logo img{width:100px;max-width:100px;height:70px;transition:all 0.3s ease;cursor:pointer;filter:drop-shadow(0 6px 12px rgba(0,0,0,0.15));}
 .nav-links{display:flex;align-items:center;gap:28px;list-style:none}
 .nav-links > li > a{color:var(--white);font-weight:500;padding:10px 0;display:flex;align-items:center;gap:6px;transition:var(--trans)}
 .nav-links > li > a:hover{color:var(--orange)}
-.logo{display:flex;align-items:center;justify-content:center;padding:10px 20px}
-.logo img{width:100px;max-width:100px;height:70px;transition:all 0.3s ease;cursor:pointer;filter:drop-shadow(0 6px 12px rgba(0,0,0,0.15));}
 
 
 li.drop-down{position:relative}
@@ -243,14 +242,13 @@ footer{background:var(--navy);color:var(--white);padding:70px 0 25px}
 <!-- NAVBAR -->
 <nav>
   <div class="nav-wrap container">
-    <div class="logo">
-      <img src="/logo.png" alt="GlobalSwift Logo">
+    <div class="logo"><i class="fa-solid fa-truck-fast" style="color:var(--orange);font-size:32px;margin-right:8px"></i><span style="color:var(--white);font-weight:700;font-size:20px">Global Swift</span>
     </div>
 
     <button class="menu-toggle" id="menuOpen"><i class="fa-solid fa-bars"></i></button>
 
     <ul class="nav-links" id="navMenu">
-      <button class="menu-toggle menu-close" id="menuClose"><i class="fa-solid fa-xmark"></i></button>
+      <li class="menu-close"><button class="menu-toggle menu-close" id="menuClose"><i class="fa-solid fa-xmark"></i></button></li>
 
       <li class="drop-down">
         <a href="index.html">Home <i class="fa-solid fa-chevron-down dropdown-icon"></i></a>
@@ -354,8 +352,8 @@ footer{background:var(--navy);color:var(--white);padding:70px 0 25px}
       <div class="carousel-slide"><img src="https://images.unsplash.com/photo-1601581875309-fafbf2d3ed3a?q=80&w=1600" alt="Modern warehouse"></div>
       <div class="carousel-slide"><img src="https://images.unsplash.com/photo-1566576912321-d58ddd7a6088?q=80&w=1600" alt="Delivery trucks fleet"></div>
     </div>
-    <button class="carousel-btn prev"><i class="fa-solid fa-chevron-left"></i></button>
-    <button class="carousel-btn next"><i class="fa-solid fa-chevron-right"></i></button>
+    <button type="button" class="carousel-btn prev" title="Previous slide"><i class="fa-solid fa-chevron-left"></i></button>
+    <button type="button" class="carousel-btn next" title="Next slide"><i class="fa-solid fa-chevron-right"></i></button>
     <div class="carousel-dots"></div>
   </div>
 </section>
@@ -410,10 +408,10 @@ footer{background:var(--navy);color:var(--white);padding:70px 0 25px}
 <section>
   <div class="container">
     <div class="grid">
-      <div class="card"><h2 style="color:var(--orange);font-size:48px">180+</h2><p>Countries Served</p></div>
-      <div class="card"><h2 style="color:var(--orange);font-size:48px">2.8M</h2><p>Shipments/Year</p></div>
-      <div class="card"><h2 style="color:var(--orange);font-size:48px">15K+</h2><p>Happy Clients</p></div>
-      <div class="card"><h2 style="color:var(--orange);font-size:48px">24/7</h2><p>Support Available</p></div>
+      <div class="card"><h2 class="stat-number">180+</h2><p>Countries Served</p></div>
+      <div class="card"><h2 class="stat-number">2.8M</h2><p>Shipments/Year</p></div>
+      <div class="card"><h2 class="stat-number">15K+</h2><p>Happy Clients</p></div>
+      <div class="card"><h2 class="stat-number">24/7</h2><p>Support Available</p></div>
     </div>
   </div>
 </section>
@@ -461,11 +459,11 @@ footer{background:var(--navy);color:var(--white);padding:70px 0 25px}
         <div class="footer-col">
             <h4>Follow Us</h4>
             <div class="socials">
-            <a href="https://www.facebook.com/globalswiftlogistics"><i class="fa-brands fa-facebook-f"></i></a>
-            <a href="https://twitter.com/globalswiftlog"><i class="fa-brands fa-twitter"></i></a>
-            <a href="https://www.linkedin.com/company/globalswiftlogistics"><i class="fa-brands fa-linkedin-in"></i></a>
-            <a href="https://www.instagram.com/globalswiftlogistics"><i class="fa-brands fa-instagram"></i></a>
-            <a href="https://www.youtube.com/globalswiftlogistics"><i class="fa-brands fa-youtube"></i></a>
+            <a href="https://www.facebook.com/globalswiftlogistics" title="Facebook"><i class="fa-brands fa-facebook-f"></i></a>
+            <a href="https://twitter.com/globalswiftlog" title="Twitter"><i class="fa-brands fa-twitter"></i></a>
+            <a href="https://www.linkedin.com/company/globalswiftlogistics" title="LinkedIn"><i class="fa-brands fa-linkedin-in"></i></a>
+            <a href="https://www.instagram.com/globalswiftlogistics" title="Instagram"><i class="fa-brands fa-instagram"></i></a>
+            <a href="https://www.youtube.com/globalswiftlogistics" title="YouTube"><i class="fa-brands fa-youtube"></i></a>
             </div>
     </div>
     <div class="copy">© 2024 Global Swift Logistics. All rights reserved.</div>
